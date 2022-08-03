@@ -4,12 +4,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.pets1.app.domain.VeterinarioVo;
 
 @Repository
 public interface IVeterinarioRepository extends JpaRepository<VeterinarioVo, Long>{
+	
+	@Query("SELECT v.nombre, v.apellidos, v.sexovt, v.telefono, v.correo, v.especialidad, v.password, v.imagenVete FROM VeterinarioVo v WHERE v.nombre =:nombre")
+	List<String[]> veterinarioPorNombre(@Param("nombre") String nombre);
 	
 	public List<VeterinarioVo> findByclinicaNit(Long nitClinica);
 

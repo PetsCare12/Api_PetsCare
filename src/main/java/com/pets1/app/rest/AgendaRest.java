@@ -62,7 +62,7 @@ public class AgendaRest {
 
 //	@PreAuthorize("hasAnyRole('VETERINARIO', 'USER')")
 	
-	@PreAuthorize("hasRole('USER''VETERINARIO')")
+	@PreAuthorize("hasAnyRole('VETERINARIO', 'USER')")
 	@DeleteMapping("/agendas/{codigo}")
 	public ResponseEntity<String> eliminarAgenda(@PathVariable Long codigo){
 		agendaService.eliminarAgenda(codigo);

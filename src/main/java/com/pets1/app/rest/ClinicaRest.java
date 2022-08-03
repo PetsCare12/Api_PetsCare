@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pets1.app.dto.answers.ClinicaAnswerDto;
+import com.pets1.app.dto.entityData.ClinicaPorNombreDto;
 import com.pets1.app.dto.entityData.clinicaDto;
 import com.pets1.app.service.IClinicaService;
 
@@ -38,6 +39,12 @@ public class ClinicaRest {
 	@GetMapping("/clinicas/{nit}")
 	public ResponseEntity<ClinicaAnswerDto> buscarClinicaID(@PathVariable Long nit){
 		return ResponseEntity.ok(clinicaService.consultarClinicaPorId(nit));
+	}
+	
+	@GetMapping("/clinicas/nombre/{nombre}")
+	public ClinicaPorNombreDto buscarCliniicaPorNombre(@PathVariable String nombre) {
+		ClinicaPorNombreDto clinica = clinicaService.buscarClinicaPorNombre(nombre);
+		return clinica;
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")

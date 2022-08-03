@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.pets1.app.domain.ClinicaVo;
 import com.pets1.app.domain.RolVo;
 import com.pets1.app.dto.answers.ClinicaAnswerDto;
+import com.pets1.app.dto.entityData.ClinicaPorNombreDto;
 import com.pets1.app.dto.entityData.clinicaDto;
 import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
@@ -111,6 +112,26 @@ public class ClinicaServiceImpl implements IClinicaService{
 		clinicaRepository.save(clinica);
 	}
 	
+	@Override
+	public ClinicaPorNombreDto buscarClinicaPorNombre(String nombre) {
+		
+		ClinicaPorNombreDto clinicaPorNombreDto = new ClinicaPorNombreDto();
+		
+		List<String[]> clinica = clinicaRepository.clinicaPorNombre(nombre);
+		
+		for (String[] datos : clinica) {
+			clinicaPorNombreDto.setNombre(datos[0].toString());
+			clinicaPorNombreDto.setDireccion(datos[1].toString());
+			clinicaPorNombreDto.setTelefono(datos[2].toString());
+			clinicaPorNombreDto.setCorreoCv(datos[3].toString());
+			clinicaPorNombreDto.setHorario_atencion(datos[4].toString());
+			clinicaPorNombreDto.setDias_atencion(datos[5].toString());
+			clinicaPorNombreDto.setPassword(datos[6].toString());
+			clinicaPorNombreDto.setImagenclinica(datos[7].toString());
+		}
+		return clinicaPorNombreDto;
+	}
+	
 	private clinicaDto mapearDto(ClinicaVo clinica) {
 		clinicaDto clinicaDTO = modelMapper.map(clinica, clinicaDto.class);
 		return clinicaDTO;
@@ -125,6 +146,4 @@ public class ClinicaServiceImpl implements IClinicaService{
 		ClinicaVo clinica = modelMapper.map(clinicaDto, ClinicaVo.class);
 		return clinica;
 	}
-
-
 }

@@ -3,6 +3,7 @@ package com.pets1.app.service;
 import java.util.List;
 
 import com.pets1.app.dto.answers.ClinicaAnswerDto;
+import com.pets1.app.dto.entityData.ClinicaPorNombreDto;
 import com.pets1.app.dto.entityData.clinicaDto;
 
 public interface IClinicaService {
@@ -18,4 +19,6 @@ public interface IClinicaService {
 	void eliminarClinica(Long nitClinica);
 	
 	void actualizarEstado(int estado, Long nit);
+	
+	ClinicaPorNombreDto buscarClinicaPorNombre(String nombre);
 }

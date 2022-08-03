@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pets1.app.dto.answers.MascotaAswerDto;
 import com.pets1.app.dto.entityData.MascotaDto;
+import com.pets1.app.dto.entityData.MascotaPorNombreDto;
 
 public interface IMascotaService {
 
@@ -16,5 +17,7 @@ public interface IMascotaService {
 	MascotaDto actualizarMascota(Long documentoUsuario, Long codigoMascota, MascotaDto mascotaDto);
 	
 	void eliminarMascota(Long documentoUsuario, Long codigoMascota);
+	
+	MascotaPorNombreDto buscarMascotaPorNombre(String nombre);
 	
 }

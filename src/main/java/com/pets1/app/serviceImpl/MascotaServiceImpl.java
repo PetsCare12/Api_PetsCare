@@ -14,6 +14,7 @@ import com.pets1.app.domain.MascotaVo;
 import com.pets1.app.domain.UsuarioVo;
 import com.pets1.app.dto.answers.MascotaAswerDto;
 import com.pets1.app.dto.entityData.MascotaDto;
+import com.pets1.app.dto.entityData.MascotaPorNombreDto;
 import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
 import com.pets1.app.repository.IMascotaRepository;
@@ -97,6 +98,24 @@ public class MascotaServiceImpl implements IMascotaService{
 		mascotaRepository.delete(mascota);
 	}
 	
+	@Override
+	public MascotaPorNombreDto buscarMascotaPorNombre(String nombre) {
+		
+		MascotaPorNombreDto mascotaNombreDto = new MascotaPorNombreDto();
+		
+		List<String[]> mascota = mascotaRepository.mascotaPorNombre(nombre);
+		
+		for (String[] datos : mascota) {
+			mascotaNombreDto.setNombre(datos[0].toString());
+			mascotaNombreDto.setRaza(datos[1].toString());
+			mascotaNombreDto.setColor(datos[2].toString());
+			mascotaNombreDto.setDiscapacidad(datos[3].toString());
+			mascotaNombreDto.setTipoAnimal(datos[4].toString());
+			mascotaNombreDto.setImagenMascota(datos[5].toString());
+		}
+		return mascotaNombreDto;
+	}
+	
 	private MascotaDto mapearDto(MascotaVo mascota) {
 		MascotaDto mascotaDTO = modelMapper.map(mascota, MascotaDto.class);
 		return mascotaDTO;
@@ -111,4 +130,5 @@ public class MascotaServiceImpl implements IMascotaService{
 		MascotaVo mascota = modelMapper.map(mascotaDto, MascotaVo.class);
 		return mascota;
 	}
+
 }
