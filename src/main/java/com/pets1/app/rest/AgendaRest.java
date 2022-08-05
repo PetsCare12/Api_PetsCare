@@ -24,7 +24,7 @@ import com.pets1.app.service.IAgendaService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"*"})
 public class AgendaRest {
 	
 	@Autowired

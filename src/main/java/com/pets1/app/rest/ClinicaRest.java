@@ -25,7 +25,7 @@ import com.pets1.app.service.IClinicaService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"*"})
 public class ClinicaRest {
 	
 	@Autowired

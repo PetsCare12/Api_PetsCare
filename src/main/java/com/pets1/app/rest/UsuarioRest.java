@@ -23,9 +23,9 @@ import com.pets1.app.dto.entityData.UsuarioDto;
 import com.pets1.app.dto.entityData.UsuarioPorNombreDto;
 import com.pets1.app.service.IUsuarioService;
 
+@CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
 public class UsuarioRest {
 	
 	@Autowired

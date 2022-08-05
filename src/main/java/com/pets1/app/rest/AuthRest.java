@@ -18,7 +18,7 @@ import com.pets1.app.seguridad.JwtTokenProvider;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"*"})
 public class AuthRest {
 	
 	@Autowired

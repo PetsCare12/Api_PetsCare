@@ -23,7 +23,7 @@ import com.pets1.app.service.IMascotaService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"*"})
 public class MascotaRest {
 	
 	@Autowired
