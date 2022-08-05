@@ -24,7 +24,7 @@ import com.pets1.app.service.IAgendaService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"*"})
 public class AgendaRest {
 	
 	@Autowired
@@ -60,7 +60,9 @@ public class AgendaRest {
 		return new ResponseEntity<>("Agenda actualizada con exito", HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasRole('USER')")
+//	@PreAuthorize("hasAnyRole('VETERINARIO', 'USER')")
+	
+	@PreAuthorize("hasAnyRole('VETERINARIO', 'USER')")
 	@DeleteMapping("/agendas/{codigo}")
 	public ResponseEntity<String> eliminarAgenda(@PathVariable Long codigo){
 		agendaService.eliminarAgenda(codigo);

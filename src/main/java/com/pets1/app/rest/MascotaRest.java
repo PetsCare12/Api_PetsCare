@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pets1.app.dto.answers.MascotaAswerDto;
 import com.pets1.app.dto.entityData.MascotaDto;
+import com.pets1.app.dto.entityData.MascotaPorNombreDto;
 import com.pets1.app.service.IMascotaService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"*"})
 public class MascotaRest {
 	
 	@Autowired
@@ -37,7 +38,13 @@ public class MascotaRest {
 	public ResponseEntity<MascotaDto> buscarMascotaID(@PathVariable Long documento, @PathVariable Long codigo){
 		MascotaDto mascotaDto = mascotaService.obtenerMascotaId(documento, codigo);	
 		return new ResponseEntity<>(mascotaDto, HttpStatus.OK);
-	}	
+	}
+	
+	@GetMapping("/mascotas/{nombre}")
+	public  MascotaPorNombreDto buscarMascotaPorNombre(@PathVariable String nombre) {
+		MascotaPorNombreDto mascota = mascotaService.buscarMascotaPorNombre(nombre);
+		return mascota;
+	}
 	
 	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/usuario/{documento}/mascota")

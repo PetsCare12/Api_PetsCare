@@ -17,6 +17,7 @@ import com.pets1.app.domain.RolVo;
 import com.pets1.app.domain.VeterinarioVo;
 import com.pets1.app.dto.answers.VeterinarioAnswerDto;
 import com.pets1.app.dto.entityData.VeterinarioDto;
+import com.pets1.app.dto.entityData.VeterinarioPorNombreDto;
 import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
 import com.pets1.app.repository.IClinicaRepository;
@@ -121,6 +122,26 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 		
 		veterinario.setEstadoVt(estadoVt);
 		veterinarioRepository.save(veterinario);
+	}
+	
+	@Override
+	public VeterinarioPorNombreDto buscarVeterinarioPorNombre(String nombre) {
+		
+		VeterinarioPorNombreDto veterinarioPorNombre = new VeterinarioPorNombreDto();
+		
+		List<String[]> veterinario = veterinarioRepository.veterinarioPorNombre(nombre);
+		
+		for (String[] datos : veterinario) {
+			veterinarioPorNombre.setNombre(datos[0].toString());
+			veterinarioPorNombre.setApellidos(datos[1].toString());
+			veterinarioPorNombre.setSexovt(datos[2].toString());
+			veterinarioPorNombre.setTelefono(datos[3].toString());
+			veterinarioPorNombre.setCorreo(datos[4].toString());
+			veterinarioPorNombre.setEspecialidad(datos[5].toString());
+			veterinarioPorNombre.setPassword(datos[6].toString());
+			veterinarioPorNombre.setImagenVete(datos[7].toString());
+		}
+		return veterinarioPorNombre;
 	}
 	
 	private VeterinarioDto mapearDto(VeterinarioVo veterinarioVo) {

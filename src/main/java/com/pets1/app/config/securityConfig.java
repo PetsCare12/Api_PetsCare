@@ -50,6 +50,7 @@ public class securityConfig  extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.cors().init(http);
 		http.csrf().disable()
 		.exceptionHandling()
 		.authenticationEntryPoint(autenticationEntryPoint)

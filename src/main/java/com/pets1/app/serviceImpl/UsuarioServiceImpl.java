@@ -16,6 +16,7 @@ import com.pets1.app.domain.RolVo;
 import com.pets1.app.domain.UsuarioVo;
 import com.pets1.app.dto.answers.UsuarioAnswerDto;
 import com.pets1.app.dto.entityData.UsuarioDto;
+import com.pets1.app.dto.entityData.UsuarioPorNombreDto;
 import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
 import com.pets1.app.repository.IRolRepository;
@@ -120,6 +121,26 @@ public class UsuarioServiceImpl implements IUsuarioService{
 		usuarioRepository.save(usuario);
 	}
 
+	@Override
+	public UsuarioPorNombreDto buscarUsuarioPorNombre(String nombre) {
+		
+		UsuarioPorNombreDto usuarioDto = new UsuarioPorNombreDto();
+		
+		List<String[]> usuario = usuarioRepository.usuarioPorNombre(nombre);
+		
+		
+		for (String[] datos : usuario) {
+			usuarioDto.setNombreUs(datos[0].toString());
+			usuarioDto.setApellidoUs(datos[1].toString());
+			usuarioDto.setSexoUs(datos[2].toString());
+			usuarioDto.setTelefonoUs(datos[3].toString());
+			usuarioDto.setCorreoUs(datos[4].toString());
+			usuarioDto.setPasswordUs(datos[5].toString());
+			usuarioDto.setImagenUsu(datos[6].toString());
+		}
+		return usuarioDto;
+	}
+	
 	private UsuarioDto mapearDto(UsuarioVo usuario) {
 		UsuarioDto usuarioDTO = modelMapper.map(usuario, UsuarioDto.class);
 		return usuarioDTO;

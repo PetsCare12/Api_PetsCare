@@ -20,11 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pets1.app.dto.answers.UsuarioAnswerDto;
 import com.pets1.app.dto.entityData.UsuarioDto;
+import com.pets1.app.dto.entityData.UsuarioPorNombreDto;
 import com.pets1.app.service.IUsuarioService;
 
+@CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
 public class UsuarioRest {
 	
 	@Autowired
@@ -44,8 +45,14 @@ public class UsuarioRest {
 	public ResponseEntity<UsuarioAnswerDto> buuscarUsuarioConMascotas(@PathVariable Long documento){
 		return new ResponseEntity<>(usuarioService.buscarUsuarioConMascotas(documento), HttpStatus.OK);
 	}
+	
+	@GetMapping("/usuarios/nombre/{nombre}")
+	public UsuarioPorNombreDto buscarUsuarioPorNombre(@PathVariable String nombre) {
+		UsuarioPorNombreDto usuario = usuarioService.buscarUsuarioPorNombre(nombre);
+		return usuario;
+	}
 
-	@PostMapping("/usuarios")	
+	@PostMapping("/usuarios")
 	public ResponseEntity<String> guardarUsuario(@Valid @RequestBody UsuarioDto usuarioDto){	
 		usuarioService.guardarUsuario(usuarioDto);
 		return new ResponseEntity<>("Usuario registrado con exito", HttpStatus.CREATED);
