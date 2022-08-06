@@ -1,6 +1,6 @@
 package com.pets1.app.dto.entityData;
 
-public class UsuarioyRoles {
+public class UsuarioyRolesDto {
 	
 	private String documentoUs;
 	

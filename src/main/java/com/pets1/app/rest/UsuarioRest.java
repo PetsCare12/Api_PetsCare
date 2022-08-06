@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pets1.app.dto.answers.UsuarioAnswerDto;
 import com.pets1.app.dto.entityData.UsuarioDto;
 import com.pets1.app.dto.entityData.UsuarioPorNombreDto;
-import com.pets1.app.dto.entityData.UsuarioyRoles;
+import com.pets1.app.dto.entityData.UsuarioyRolesDto;
 import com.pets1.app.service.IUsuarioService;
 
 @CrossOrigin(origins = {"*"})
@@ -54,8 +54,8 @@ public class UsuarioRest {
 	}
 	
 	@GetMapping("/usuarios/{documento}/rol")
-	public UsuarioyRoles buscarUsuarioYRol(@PathVariable Long documento) {
-		UsuarioyRoles usuario = usuarioService.buscarUsaurioConRol(documento);
+	public UsuarioyRolesDto buscarUsuarioYRol(@PathVariable Long documento) {
+		UsuarioyRolesDto usuario = usuarioService.buscarUsaurioConRol(documento);
 		return usuario;
 	}
 

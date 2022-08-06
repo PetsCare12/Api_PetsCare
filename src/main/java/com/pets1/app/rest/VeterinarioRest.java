@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pets1.app.dto.answers.VeterinarioAnswerDto;
 import com.pets1.app.dto.entityData.VeterinarioDto;
 import com.pets1.app.dto.entityData.VeterinarioPorNombreDto;
+import com.pets1.app.dto.entityData.VeterinarioYRolesDto;
 import com.pets1.app.service.IVeterinarioService;
 
 @RestController
@@ -44,6 +45,11 @@ public class VeterinarioRest {
 	public VeterinarioPorNombreDto buscarVeterinarioPorNombre(@PathVariable String nombre) {
 		VeterinarioPorNombreDto veterinario = veterinarioService.buscarVeterinarioPorNombre(nombre);
 		return veterinario;
+	}
+	
+	@GetMapping("/veterinarios/{documento}/rol")
+	public VeterinarioYRolesDto buscarVeterinarioConRol(@PathVariable Long documento) {
+		return veterinarioService.buscarVeterinarioYRoles(documento);
 	}
 	
 	@PreAuthorize("hasRole('CLINICA')")

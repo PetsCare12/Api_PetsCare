@@ -17,7 +17,7 @@ import com.pets1.app.domain.UsuarioVo;
 import com.pets1.app.dto.answers.UsuarioAnswerDto;
 import com.pets1.app.dto.entityData.UsuarioDto;
 import com.pets1.app.dto.entityData.UsuarioPorNombreDto;
-import com.pets1.app.dto.entityData.UsuarioyRoles;
+import com.pets1.app.dto.entityData.UsuarioyRolesDto;
 import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
 import com.pets1.app.repository.IRolRepository;
@@ -143,8 +143,8 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	}
 	
 	@Override
-	public UsuarioyRoles buscarUsaurioConRol(Long documento) {
-		UsuarioyRoles usuario = new UsuarioyRoles();
+	public UsuarioyRolesDto buscarUsaurioConRol(Long documento) {
+		UsuarioyRolesDto usuario = new UsuarioyRolesDto();
 		List<String[]> listaUsu = usuarioRepository.usuarioyRoles(documento);
 		
 		for (String[] datos : listaUsu) {

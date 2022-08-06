@@ -5,7 +5,7 @@ import java.util.List;
 import com.pets1.app.dto.answers.UsuarioAnswerDto;
 import com.pets1.app.dto.entityData.UsuarioDto;
 import com.pets1.app.dto.entityData.UsuarioPorNombreDto;
-import com.pets1.app.dto.entityData.UsuarioyRoles;
+import com.pets1.app.dto.entityData.UsuarioyRolesDto;
 
 public interface IUsuarioService {
 
@@ -25,5 +25,5 @@ public interface IUsuarioService {
 
 	UsuarioPorNombreDto buscarUsuarioPorNombre(String nombre);
 	
-	UsuarioyRoles buscarUsaurioConRol(Long documento);
+	UsuarioyRolesDto buscarUsaurioConRol(Long documento);
 }
