@@ -16,6 +16,7 @@ import com.pets1.app.domain.ClinicaVo;
 import com.pets1.app.domain.RolVo;
 import com.pets1.app.dto.answers.ClinicaAnswerDto;
 import com.pets1.app.dto.entityData.ClinicaPorNombreDto;
+import com.pets1.app.dto.entityData.ClinicayRolDto;
 import com.pets1.app.dto.entityData.clinicaDto;
 import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
@@ -132,6 +133,20 @@ public class ClinicaServiceImpl implements IClinicaService{
 		return clinicaPorNombreDto;
 	}
 	
+	@Override
+	public ClinicayRolDto buscarClinicaYRol(Long nit) {
+		ClinicayRolDto clinica = new ClinicayRolDto();
+		List<String[]> cli = clinicaRepository.clinicayRoles(nit);
+		
+		for (String[] datos : cli) {
+			clinica.setNit(datos[0].toString());
+			clinica.setCorreo(datos[1].toString());
+			clinica.setRol(datos[2].toString());
+		}
+		
+		return clinica;
+	}
+	
 	private clinicaDto mapearDto(ClinicaVo clinica) {
 		clinicaDto clinicaDTO = modelMapper.map(clinica, clinicaDto.class);
 		return clinicaDTO;
@@ -146,4 +161,5 @@ public class ClinicaServiceImpl implements IClinicaService{
 		ClinicaVo clinica = modelMapper.map(clinicaDto, ClinicaVo.class);
 		return clinica;
 	}
+
 }

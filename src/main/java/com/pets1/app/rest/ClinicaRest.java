@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pets1.app.dto.answers.ClinicaAnswerDto;
 import com.pets1.app.dto.entityData.ClinicaPorNombreDto;
+import com.pets1.app.dto.entityData.ClinicayRolDto;
 import com.pets1.app.dto.entityData.clinicaDto;
 import com.pets1.app.service.IClinicaService;
 
@@ -45,6 +46,11 @@ public class ClinicaRest {
 	public ClinicaPorNombreDto buscarCliniicaPorNombre(@PathVariable String nombre) {
 		ClinicaPorNombreDto clinica = clinicaService.buscarClinicaPorNombre(nombre);
 		return clinica;
+	}
+	
+	@GetMapping("/clinicas/{nit}/rol")
+	public ClinicayRolDto buscarClinicaYRol(@PathVariable Long nit){
+		return clinicaService.buscarClinicaYRol(nit);
 	}
 	
 	@PreAuthorize("hasRole('ADMIN')")
