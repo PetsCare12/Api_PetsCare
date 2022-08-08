@@ -74,6 +74,8 @@ public class MascotaServiceImpl implements IMascotaService{
 		}
 		
 		mascota.setNombre(mascotaDto.getNombre());
+		mascota.setEdad(mascotaDto.getEdad());
+		mascota.setSexo(mascotaDto.getSexo());
 		mascota.setRaza(mascotaDto.getRaza());
 		mascota.setColor(mascotaDto.getColor());
 		mascota.setPeso(mascotaDto.getPeso());
@@ -107,11 +109,13 @@ public class MascotaServiceImpl implements IMascotaService{
 		
 		for (String[] datos : mascota) {
 			mascotaNombreDto.setNombre(datos[0].toString());
-			mascotaNombreDto.setRaza(datos[1].toString());
-			mascotaNombreDto.setColor(datos[2].toString());
-			mascotaNombreDto.setDiscapacidad(datos[3].toString());
-			mascotaNombreDto.setTipoAnimal(datos[4].toString());
-			mascotaNombreDto.setImagenMascota(datos[5].toString());
+			mascotaNombreDto.setEdad(datos[1].toString());
+			mascotaNombreDto.setSexo(datos[2].toString());
+			mascotaNombreDto.setRaza(datos[3].toString());
+			mascotaNombreDto.setColor(datos[4].toString());
+			mascotaNombreDto.setDiscapacidad(datos[5].toString());
+			mascotaNombreDto.setTipoAnimal(datos[6].toString());
+			mascotaNombreDto.setImagenMascota(datos[7].toString());
 		}
 		return mascotaNombreDto;
 	}

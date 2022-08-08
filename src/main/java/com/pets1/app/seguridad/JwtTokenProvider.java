@@ -101,18 +101,18 @@ public class JwtTokenProvider {
 		String idUsuario = null;
 		
 		if (usu == true) {
-			UsuarioVo usuario=usuarioRepository.findByNombreUsOrCorreoUs(userName, userName)
+			UsuarioVo usuario = usuarioRepository.findByNombreUsOrCorreoUs(userName, userName)
 					.orElseThrow(() -> new UsernameNotFoundException("Usuario no Encontrado"));
 			idUsuario = usuario.getDocumentoUs().toString();
 		}
 		else if (clinica == true){
-			ClinicaVo cli=clinicaRepository.findByNombreOrCorreoCv(userName, userName)
-					.orElseThrow(() -> new UsernameNotFoundException("Usuario no Encontrado"));
+			ClinicaVo cli = clinicaRepository.findByNombreOrCorreoCv(userName, userName)
+					.orElseThrow(() -> new UsernameNotFoundException("Clinica no Encontrado"));
 			idUsuario = cli.getNit().toString();
 		}
 		else if (veterinario == true) {
-			VeterinarioVo vete=veterinarioRepository.findByNombreOrCorreo(userName, userName)
-					.orElseThrow(() -> new UsernameNotFoundException("Usuario no Encontrado"));
+			VeterinarioVo vete = veterinarioRepository.findByNombreOrCorreo(userName, userName)
+					.orElseThrow(() -> new UsernameNotFoundException("Veterinario no Encontrado"));
 			idUsuario = vete.getDocumento().toString();
 		}
 		else {
