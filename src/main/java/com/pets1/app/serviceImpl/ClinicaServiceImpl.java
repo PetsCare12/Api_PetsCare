@@ -85,8 +85,6 @@ public class ClinicaServiceImpl implements IClinicaService{
 		clinica.setDireccion(clinicaDto.getDireccion());
 		clinica.setTelefono(clinicaDto.getTelefono());
 		clinica.setCorreoCv(clinicaDto.getCorreoCv());
-		clinica.setHorario_atencion(clinicaDto.getHorario_atencion());
-		clinica.setDias_atencion(clinicaDto.getDias_atencion());
 		clinica.setPasswordCv(passwordEncoder.encode(clinicaDto.getPassword()));
 		clinica.setImagenclinica(clinicaDto.getImagenclinica());
 		
@@ -125,8 +123,6 @@ public class ClinicaServiceImpl implements IClinicaService{
 			clinicaPorNombreDto.setDireccion(datos[1].toString());
 			clinicaPorNombreDto.setTelefono(datos[2].toString());
 			clinicaPorNombreDto.setCorreoCv(datos[3].toString());
-			clinicaPorNombreDto.setHorario_atencion(datos[4].toString());
-			clinicaPorNombreDto.setDias_atencion(datos[5].toString());
 			clinicaPorNombreDto.setPassword(datos[6].toString());
 			clinicaPorNombreDto.setImagenclinica(datos[7].toString());
 		}

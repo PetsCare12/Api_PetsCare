@@ -10,10 +10,6 @@ public class ClinicaPorNombreDto {
 	
 	private String correoCv;
 	
-	private String horario_atencion;
-	
-	private String dias_atencion;
-	
 	private String password;
 	
 	private String imagenclinica;
@@ -48,22 +44,6 @@ public class ClinicaPorNombreDto {
 
 	public void setCorreoCv(String correoCv) {
 		this.correoCv = correoCv;
-	}
-
-	public String getHorario_atencion() {
-		return horario_atencion;
-	}
-
-	public void setHorario_atencion(String horario_atencion) {
-		this.horario_atencion = horario_atencion;
-	}
-
-	public String getDias_atencion() {
-		return dias_atencion;
-	}
-
-	public void setDias_atencion(String dias_atencion) {
-		this.dias_atencion = dias_atencion;
 	}
 
 	public String getPassword() {

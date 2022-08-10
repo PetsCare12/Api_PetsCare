@@ -19,7 +19,7 @@ public class AgendaVo {
 	@Column(name = "codigo_agen")
 	private Long codigoA;
 
-	@Column(name = "fecha_historiaclin", nullable = false)
+	@Column(name = "fecha_agenda", nullable = false)
 	private String fecha;
 	
 	@Column(name = "hora_inicio", nullable = false)
