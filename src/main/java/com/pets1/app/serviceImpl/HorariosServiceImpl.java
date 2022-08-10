@@ -38,14 +38,20 @@ public class HorariosServiceImpl implements IHorariosService{
 	private ModelMapper modelMapper;
 
 	@Override
-	public void CrearHorarios(Long nitClinica, Long documentoVeterinario, HorariosDto horariosDto) {
-		ClinicaVo clinicaVo = clinicaRepository.findById(nitClinica).orElseThrow(() -> new ResourceNotFoudExeption("clinica", "nit", nitClinica));
+	public void CrearHorariosVeterinario(Long documentoVeterinario, HorariosDto horariosDto) {
 		VeterinarioVo veterinarioVo = veterinarioRepository.findById(documentoVeterinario).orElseThrow(() -> new ResourceNotFoudExeption("Veterinario", "documento", documentoVeterinario));
 		
 		HorariosVo datosHorarios = mapearEntidad(horariosDto);
-		
-		datosHorarios.setNitCli(clinicaVo);
 		datosHorarios.setDocumentovt(veterinarioVo);
+		horariosRepository.save(datosHorarios);
+	}
+	
+	@Override
+	public void CrearHorariosClinica(Long nitClinica, HorariosDto horariosDto) {
+		ClinicaVo clinicaVo = clinicaRepository.findById(nitClinica).orElseThrow(() -> new ResourceNotFoudExeption("Clinica", "documento", nitClinica));
+		
+		HorariosVo datosHorarios = mapearEntidad(horariosDto);
+		datosHorarios.setNitCli(clinicaVo);
 		horariosRepository.save(datosHorarios);
 	}
 
@@ -99,5 +105,4 @@ public class HorariosServiceImpl implements IHorariosService{
 		HorariosDto horariosDto = modelMapper.map(horariosVo, HorariosDto.class);
 		return horariosDto;
 	}
-
 }

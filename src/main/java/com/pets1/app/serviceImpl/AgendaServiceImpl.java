@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.pets1.app.domain.AgendaVo;
@@ -16,6 +17,7 @@ import com.pets1.app.dto.answers.AgendaAnswerDto;
 import com.pets1.app.dto.answers.AgendaUsuarioAnswerDto;
 import com.pets1.app.dto.answers.AgendaVeterinarioAnswerDto;
 import com.pets1.app.dto.entityData.AgendaDto;
+import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
 import com.pets1.app.repository.IAgendaRepository;
 import com.pets1.app.repository.IUsuarioRepository;
@@ -38,6 +40,11 @@ public class AgendaServiceImpl implements IAgendaService{
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	private int CREADA = 1;
+	private int ENCURSO = 2;
+	private int CANCELADA = 3;
+	private int FINALIZADA = 4;
+	
 	@Override
 	public void CrearAgenda(Long documentoUsuario, Long documentoVeterinario, AgendaDto agendaDto) {
 		UsuarioVo usuario = usuarioRepository.findById(documentoUsuario).orElseThrow(() -> new ResourceNotFoudExeption("usuario", "documento", documentoUsuario));
@@ -46,7 +53,12 @@ public class AgendaServiceImpl implements IAgendaService{
 		AgendaVo datosCita = mapearEntidad(agendaDto);
 		
 		datosCita.setDocumentous(usuario);
-		datosCita.setDocumentovt(veterinario);	
+		datosCita.setDocumentovt(veterinario);
+		
+		if (datosCita.getEstado() != CREADA && datosCita.getEstado() != ENCURSO && datosCita.getEstado() != CANCELADA && datosCita.getEstado() != FINALIZADA){
+			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "El estado no puede ser menor a 1 y mayor de 4");
+		}
+		
 		agendaRepository.save(datosCita);
 	}
 

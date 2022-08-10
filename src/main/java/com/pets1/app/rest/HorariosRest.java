@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,10 +39,18 @@ public class HorariosRest {
 		return horariosService.listaHorariosVeterinario(documentoVeterinario);
 	}
 	
-	@PostMapping("/clinica/{nitClinica}/veterinario/{documentoVeterinario}/horarios")
-	public ResponseEntity<String> guardarHorarios(@PathVariable Long nitClinica, @PathVariable Long documentoVeterinario, @RequestBody HorariosDto horariosDto){
-		horariosService.CrearHorarios(nitClinica, documentoVeterinario, horariosDto);
-		return new ResponseEntity<> ("Horario creada con exito", HttpStatus.CREATED);
+	@PreAuthorize("hasRole('CLINICA')")
+	@PostMapping("/veterinario/{documentoVeterinario}/horarios")
+	public ResponseEntity<String> guardarHorariosVeterinario(@PathVariable Long documentoVeterinario, @RequestBody HorariosDto horariosDto){
+		horariosService.CrearHorariosVeterinario(documentoVeterinario, horariosDto);
+		return new ResponseEntity<> ("Horario del veterinario creada con exito", HttpStatus.CREATED);
+	}
+	
+	@PreAuthorize("hasRole('CLINICA')")
+	@PostMapping("/clinica/{nitClinica}/horarios")
+	public ResponseEntity<String> guardarHorariosClinica(@PathVariable Long nitClinica, @RequestBody HorariosDto horariosDto){
+		horariosService.CrearHorariosClinica(nitClinica, horariosDto);
+		return new ResponseEntity<> ("Horario de la clinica creada con exito", HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/horarios/{id}")

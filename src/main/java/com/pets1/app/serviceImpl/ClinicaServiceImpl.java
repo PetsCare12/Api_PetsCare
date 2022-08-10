@@ -40,6 +40,9 @@ public class ClinicaServiceImpl implements IClinicaService{
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	private int ACTIVO = 1;
+	private int INACTIVO = 2;
+	
 	@Override
 	public void crearClinica(clinicaDto clinicaDto) {
 		boolean clinica = clinicaRepository.findById(clinicaDto.getNit()).isPresent();
@@ -52,7 +55,7 @@ public class ClinicaServiceImpl implements IClinicaService{
 			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "Ya existe un clinica con este email" );
 		}
 		
-		else if(clinicaDto.getEstadoCli() !=1 && clinicaDto.getEstadoCli() !=2) {
+		else if(clinicaDto.getEstadoCli() != ACTIVO && clinicaDto.getEstadoCli() != INACTIVO) {
 			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "el estado no puede ser mayor a 2 ni menor a 1" );
 		}
 		
@@ -103,7 +106,7 @@ public class ClinicaServiceImpl implements IClinicaService{
 	public void actualizarEstado(int estado, Long nit) {
 		ClinicaVo clinica = clinicaRepository.findById(nit).orElseThrow(() -> new ResourceNotFoudExeption("clinica", "nit", nit));
 		
-		if(estado !=1 && estado !=2) {
+		if(estado != ACTIVO && estado != INACTIVO) {
 			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "el estado no puede ser mayor a 2 ni menor a 1" );
 		}
 		

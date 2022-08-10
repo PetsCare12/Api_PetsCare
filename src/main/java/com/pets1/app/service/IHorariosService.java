@@ -8,7 +8,9 @@ import com.pets1.app.dto.entityData.HorariosDto;
 
 public interface IHorariosService {
 
-	void CrearHorarios(Long nitClinica, Long documentoVeterinario, HorariosDto horariosDto);
+	void CrearHorariosVeterinario(Long documentoVeterinario, HorariosDto horariosDto);
+	
+	void CrearHorariosClinica(Long nitClinica, HorariosDto horariosDto);
 	
 	List<HorariosClinicaAnswerDto> listaHorariosClinica(Long nitClinica);
 	
