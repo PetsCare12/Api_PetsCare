@@ -42,6 +42,7 @@ public class ClinicaServiceImpl implements IClinicaService{
 	
 	private int ACTIVO = 1;
 	private int INACTIVO = 2;
+	private int SOLICITUD = 3;
 	
 	@Override
 	public void crearClinica(clinicaDto clinicaDto) {
@@ -55,8 +56,8 @@ public class ClinicaServiceImpl implements IClinicaService{
 			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "Ya existe un clinica con este email" );
 		}
 		
-		else if(clinicaDto.getEstadoCli() != ACTIVO && clinicaDto.getEstadoCli() != INACTIVO) {
-			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "el estado no puede ser mayor a 2 ni menor a 1" );
+		else if(clinicaDto.getEstadoCli() != ACTIVO && clinicaDto.getEstadoCli() != INACTIVO && clinicaDto.getEstadoCli() != SOLICITUD) {
+			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "el estado no puede ser mayor a 3 ni menor a 1" );
 		}
 		
 		ClinicaVo clinicaDatos = mapearEntidad(clinicaDto);
@@ -106,8 +107,8 @@ public class ClinicaServiceImpl implements IClinicaService{
 	public void actualizarEstado(int estado, Long nit) {
 		ClinicaVo clinica = clinicaRepository.findById(nit).orElseThrow(() -> new ResourceNotFoudExeption("clinica", "nit", nit));
 		
-		if(estado != ACTIVO && estado != INACTIVO) {
-			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "el estado no puede ser mayor a 2 ni menor a 1" );
+		if(estado != ACTIVO && estado != INACTIVO && estado != SOLICITUD) {
+			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "el estado no puede ser mayor a 3 ni menor a 1" );
 		}
 		
 		clinica.setEstadoCli(estado);	

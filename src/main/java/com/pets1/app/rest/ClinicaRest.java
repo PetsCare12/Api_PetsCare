@@ -53,7 +53,6 @@ public class ClinicaRest {
 		return clinicaService.buscarClinicaYRol(nit);
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/clinicas")
 	public ResponseEntity<String> guardarClinica(@Valid @RequestBody clinicaDto clinicaDto){	
 		clinicaService.crearClinica(clinicaDto);
