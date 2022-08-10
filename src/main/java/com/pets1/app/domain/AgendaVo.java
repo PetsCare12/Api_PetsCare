@@ -22,8 +22,17 @@ public class AgendaVo {
 	@Column(name = "fecha_historiaclin", nullable = false)
 	private String fecha;
 	
-	@Column(name = "hora_agen", nullable = false)
-	private String hora;
+	@Column(name = "hora_inicio", nullable = false)
+	private String horaInicio;
+	
+	@Column(name = "hora_salida", nullable = false)
+	private String horaSalida;
+	
+	@Column(name = "notas")
+	private String notas;
+	
+	@Column(name = "estado_agenda", nullable = false)
+	private int estado;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "documento_us", nullable = false)
@@ -37,12 +46,16 @@ public class AgendaVo {
 		
 	}
 
-	public AgendaVo(Long codigoA, String fecha, String hora, UsuarioVo agendaus, VeterinarioVo documentovt) {
+	public AgendaVo(Long codigoA, String fecha, String horaInicio, String horaSalida, String notas, int estado,
+			UsuarioVo documentous, VeterinarioVo documentovt) {
 		super();
 		this.codigoA = codigoA;
 		this.fecha = fecha;
-		this.hora = hora;
-		this.documentous = agendaus;
+		this.horaInicio = horaInicio;
+		this.horaSalida = horaSalida;
+		this.notas = notas;
+		this.estado = estado;
+		this.documentous = documentous;
 		this.documentovt = documentovt;
 	}
 
@@ -62,12 +75,36 @@ public class AgendaVo {
 		this.fecha = fecha;
 	}
 
-	public String getHora() {
-		return hora;
+	public String getHoraInicio() {
+		return horaInicio;
 	}
 
-	public void setHora(String hora) {
-		this.hora = hora;
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public String getHoraSalida() {
+		return horaSalida;
+	}
+
+	public void setHoraSalida(String horaSalida) {
+		this.horaSalida = horaSalida;
+	}
+
+	public String getNotas() {
+		return notas;
+	}
+
+	public void setNotas(String notas) {
+		this.notas = notas;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	public UsuarioVo getDocumentous() {
