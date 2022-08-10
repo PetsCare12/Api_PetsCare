@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pets1.app.dto.answers.VeterinarioAnswerDto;
+import com.pets1.app.dto.answers.VeterinarioPorNombreDto;
+import com.pets1.app.dto.answers.VeterinarioYRolesDto;
 import com.pets1.app.dto.entityData.VeterinarioDto;
-import com.pets1.app.dto.entityData.VeterinarioPorNombreDto;
-import com.pets1.app.dto.entityData.VeterinarioYRolesDto;
 import com.pets1.app.service.IVeterinarioService;
 
 @RestController

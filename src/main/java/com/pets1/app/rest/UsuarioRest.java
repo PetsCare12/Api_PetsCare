@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pets1.app.dto.answers.UsuarioAnswerDto;
+import com.pets1.app.dto.answers.UsuarioPorNombreDto;
+import com.pets1.app.dto.answers.UsuarioyRolesDto;
 import com.pets1.app.dto.entityData.UsuarioDto;
-import com.pets1.app.dto.entityData.UsuarioPorNombreDto;
-import com.pets1.app.dto.entityData.UsuarioyRolesDto;
 import com.pets1.app.service.IUsuarioService;
 
 @CrossOrigin(origins = {"*"})
