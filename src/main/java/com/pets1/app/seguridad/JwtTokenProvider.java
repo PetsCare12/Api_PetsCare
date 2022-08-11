@@ -2,6 +2,8 @@ package com.pets1.app.seguridad;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,12 +55,12 @@ public class JwtTokenProvider {
 		Collection<? extends GrantedAuthority> rolUsu = authentication.getAuthorities();
 		String rol = rolUsu.toString();
 		
-		String usuario = idDeUsuario(userName);
+		Map<String, Object> info = infoAdicional(userName);
 		
 		Date fechaActual = new Date();
 		Date fechaExpiracion = new Date(fechaActual.getTime() + jwtExpirationInMs);
 		
-		String token = Jwts.builder().setId(usuario).setSubject(userName).setAudience(rol).setIssuedAt(new Date()).setExpiration(fechaExpiracion)
+		String token = Jwts.builder().setClaims(info).setAudience(rol).setIssuedAt(new Date()).setExpiration(fechaExpiracion)
 				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
 		
 		return token;
@@ -90,37 +92,40 @@ public class JwtTokenProvider {
 			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "las cadena claims estan vacias");
 		}
 	}
+
 	
-	//metodo probicional para generar el token con los datos del usuario
-	public String idDeUsuario(String userName) {
+	public Map<String, Object> infoAdicional(String userName) {
 		
 		boolean usu = usuarioRepository.findByCorreoUs(userName).isPresent();
 		boolean clinica = clinicaRepository.findByCorreoCv(userName).isPresent();
 		boolean veterinario = veterinarioRepository.findByCorreo(userName).isPresent();
 		
-		String idUsuario = null;
+		Map<String, Object> info = new HashMap<>();
 		
 		if (usu == true) {
-			UsuarioVo usuario = usuarioRepository.findByNombreUsOrCorreoUs(userName, userName)
+			UsuarioVo usuarios = usuarioRepository.findByNombreUsOrCorreoUs(userName, userName)
 					.orElseThrow(() -> new UsernameNotFoundException("Usuario no Encontrado"));
-			idUsuario = usuario.getDocumentoUs().toString();
+			info.put("id", usuarios.getDocumentoUs());
+			info.put("correo", usuarios.getCorreoUs());
+			info.put("estado", usuarios.getEstadoUs());
+			
 		}
 		else if (clinica == true){
 			ClinicaVo cli = clinicaRepository.findByNombreOrCorreoCv(userName, userName)
 					.orElseThrow(() -> new UsernameNotFoundException("Clinica no Encontrado"));
-			idUsuario = cli.getNit().toString();
+			info.put("id", cli.getNit());
+			info.put("correo", cli.getCorreoCv());
+			info.put("estado", cli.getEstadoCli());
 		}
 		else if (veterinario == true) {
 			VeterinarioVo vete = veterinarioRepository.findByNombreOrCorreo(userName, userName)
 					.orElseThrow(() -> new UsernameNotFoundException("Veterinario no Encontrado"));
-			idUsuario = vete.getDocumento().toString();
-		}
-		else {
-			idUsuario = "usuarios no encotrados con estas credenciales";
-		}
+			info.put("id", vete.getDocumento());
+			info.put("correo", vete.getCorreo());
+			info.put("estado", vete.getEstadoVt());
+		}	
 		
-		return idUsuario;
-		
+		return info;
 	}
 	
 }
