@@ -60,7 +60,7 @@ public class JwtTokenProvider {
 		Date fechaActual = new Date();
 		Date fechaExpiracion = new Date(fechaActual.getTime() + jwtExpirationInMs);
 		
-		String token = Jwts.builder().setClaims(info).setAudience(rol).setIssuedAt(new Date()).setExpiration(fechaExpiracion)
+		String token = Jwts.builder().setClaims(info).setSubject(userName).setAudience(rol).setIssuedAt(new Date()).setExpiration(fechaExpiracion)
 				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
 		
 		return token;
@@ -106,7 +106,6 @@ public class JwtTokenProvider {
 			UsuarioVo usuarios = usuarioRepository.findByNombreUsOrCorreoUs(userName, userName)
 					.orElseThrow(() -> new UsernameNotFoundException("Usuario no Encontrado"));
 			info.put("id", usuarios.getDocumentoUs());
-			info.put("correo", usuarios.getCorreoUs());
 			info.put("estado", usuarios.getEstadoUs());
 			
 		}
@@ -114,14 +113,12 @@ public class JwtTokenProvider {
 			ClinicaVo cli = clinicaRepository.findByNombreOrCorreoCv(userName, userName)
 					.orElseThrow(() -> new UsernameNotFoundException("Clinica no Encontrado"));
 			info.put("id", cli.getNit());
-			info.put("correo", cli.getCorreoCv());
 			info.put("estado", cli.getEstadoCli());
 		}
 		else if (veterinario == true) {
 			VeterinarioVo vete = veterinarioRepository.findByNombreOrCorreo(userName, userName)
 					.orElseThrow(() -> new UsernameNotFoundException("Veterinario no Encontrado"));
 			info.put("id", vete.getDocumento());
-			info.put("correo", vete.getCorreo());
 			info.put("estado", vete.getEstadoVt());
 		}	
 		

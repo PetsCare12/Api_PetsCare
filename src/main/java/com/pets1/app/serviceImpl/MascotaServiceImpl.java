@@ -40,6 +40,13 @@ public class MascotaServiceImpl implements IMascotaService{
 		UsuarioVo usuario = usuarioRepository.findById(documentoUsuario).orElseThrow(() -> new ResourceNotFoudExeption("Usuario", "documento", documentoUsuario));
 		
 		mascota.setDueniomascota(usuario);
+		
+		int edad = Integer.parseInt(mascota.getEdad());
+		
+		if (edad <= 0 || edad > 20) {
+			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "La Edad no puede ser menor a 0 y mayor de 20");
+		}
+		
 		mascotaRepository.save(mascota);	
 	}
 
