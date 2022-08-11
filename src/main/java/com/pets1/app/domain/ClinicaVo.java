@@ -54,12 +54,17 @@ public class ClinicaVo {
 	@JoinTable(name = "clinica_roles", joinColumns = @JoinColumn(name = "clinica_nit", referencedColumnName = "nit_cv"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private Set<RolVo> roles = new HashSet<>();
 	
+	@JsonBackReference
+	@OneToMany(mappedBy = "nitCli", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<HorariosVo> horarios = new HashSet<>();
+	
 	public ClinicaVo () {
 		
 	}
 
 	public ClinicaVo(Long nit, String nombre, String direccion, String telefono, String correoCv, String passwordCv,
-			String imagenclinica, int estadoCli, Set<VeterinarioVo> veterinarios, Set<RolVo> roles) {
+			String imagenclinica, int estadoCli, Set<VeterinarioVo> veterinarios, Set<RolVo> roles,
+			Set<HorariosVo> horarios) {
 		super();
 		this.nit = nit;
 		this.nombre = nombre;
@@ -71,6 +76,7 @@ public class ClinicaVo {
 		this.estadoCli = estadoCli;
 		this.veterinarios = veterinarios;
 		this.roles = roles;
+		this.horarios = horarios;
 	}
 
 	public Long getNit() {
@@ -151,6 +157,14 @@ public class ClinicaVo {
 
 	public void setRoles(Set<RolVo> roles) {
 		this.roles = roles;
+	}
+
+	public Set<HorariosVo> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(Set<HorariosVo> horarios) {
+		this.horarios = horarios;
 	}
 
 }

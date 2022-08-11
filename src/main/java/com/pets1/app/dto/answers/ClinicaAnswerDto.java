@@ -24,6 +24,8 @@ public class ClinicaAnswerDto {
 	private int estdo_cli;
 	
 	private Set<VeterinarioDto> veterinarios = new HashSet<>();
+	
+	private Set<HorariosClinicaAnswerDto> horarios = new HashSet<>();
 
 	public Long getNit() {
 		return nit;
@@ -95,5 +97,13 @@ public class ClinicaAnswerDto {
 
 	public void setVeterinarios(Set<VeterinarioDto> veterinarios) {
 		this.veterinarios = veterinarios;
+	}
+
+	public Set<HorariosClinicaAnswerDto> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(Set<HorariosClinicaAnswerDto> horarios) {
+		this.horarios = horarios;
 	}
 }
