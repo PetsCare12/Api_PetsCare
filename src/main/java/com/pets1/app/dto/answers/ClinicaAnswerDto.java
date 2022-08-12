@@ -21,7 +21,7 @@ public class ClinicaAnswerDto {
 	
 	private String imagenclinica;
 	
-	private int estdo_cli;
+	private int estadoCli;
 	
 	private Set<VeterinarioDto> veterinarios = new HashSet<>();
 	
@@ -83,12 +83,12 @@ public class ClinicaAnswerDto {
 		this.imagenclinica = imagenclinica;
 	}
 
-	public int getEstdo_cli() {
-		return estdo_cli;
+	public int getEstadoCli() {
+		return estadoCli;
 	}
 
-	public void setEstdo_cli(int estdo_cli) {
-		this.estdo_cli = estdo_cli;
+	public void setEstadoCli(int estadoCli) {
+		this.estadoCli = estadoCli;
 	}
 
 	public Set<VeterinarioDto> getVeterinarios() {
