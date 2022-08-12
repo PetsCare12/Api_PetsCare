@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pets1.app.dto.answers.ClinicaAnswerDto;
-import com.pets1.app.dto.entityData.ClinicaPorNombreDto;
+import com.pets1.app.dto.answers.ClinicaPorNombreDto;
+import com.pets1.app.dto.answers.ClinicayRolDto;
 import com.pets1.app.dto.entityData.clinicaDto;
 import com.pets1.app.service.IClinicaService;
 
@@ -47,7 +48,11 @@ public class ClinicaRest {
 		return clinica;
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/clinicas/{nit}/rol")
+	public ClinicayRolDto buscarClinicaYRol(@PathVariable Long nit){
+		return clinicaService.buscarClinicaYRol(nit);
+	}
+	
 	@PostMapping("/clinicas")
 	public ResponseEntity<String> guardarClinica(@Valid @RequestBody clinicaDto clinicaDto){	
 		clinicaService.crearClinica(clinicaDto);

@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import com.pets1.app.domain.MascotaVo;
 import com.pets1.app.domain.UsuarioVo;
 import com.pets1.app.dto.answers.MascotaAswerDto;
+import com.pets1.app.dto.answers.MascotaPorNombreDto;
 import com.pets1.app.dto.entityData.MascotaDto;
-import com.pets1.app.dto.entityData.MascotaPorNombreDto;
 import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
 import com.pets1.app.repository.IMascotaRepository;
@@ -40,6 +40,13 @@ public class MascotaServiceImpl implements IMascotaService{
 		UsuarioVo usuario = usuarioRepository.findById(documentoUsuario).orElseThrow(() -> new ResourceNotFoudExeption("Usuario", "documento", documentoUsuario));
 		
 		mascota.setDueniomascota(usuario);
+		
+		int edad = Integer.parseInt(mascota.getEdad());
+		
+		if (edad <= 0 || edad > 20) {
+			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "La Edad no puede ser menor a 0 y mayor de 20");
+		}
+		
 		mascotaRepository.save(mascota);	
 	}
 
@@ -74,6 +81,8 @@ public class MascotaServiceImpl implements IMascotaService{
 		}
 		
 		mascota.setNombre(mascotaDto.getNombre());
+		mascota.setEdad(mascotaDto.getEdad());
+		mascota.setSexo(mascotaDto.getSexo());
 		mascota.setRaza(mascotaDto.getRaza());
 		mascota.setColor(mascotaDto.getColor());
 		mascota.setPeso(mascotaDto.getPeso());
@@ -107,11 +116,13 @@ public class MascotaServiceImpl implements IMascotaService{
 		
 		for (String[] datos : mascota) {
 			mascotaNombreDto.setNombre(datos[0].toString());
-			mascotaNombreDto.setRaza(datos[1].toString());
-			mascotaNombreDto.setColor(datos[2].toString());
-			mascotaNombreDto.setDiscapacidad(datos[3].toString());
-			mascotaNombreDto.setTipoAnimal(datos[4].toString());
-			mascotaNombreDto.setImagenMascota(datos[5].toString());
+			mascotaNombreDto.setEdad(datos[1].toString());
+			mascotaNombreDto.setSexo(datos[2].toString());
+			mascotaNombreDto.setRaza(datos[3].toString());
+			mascotaNombreDto.setColor(datos[4].toString());
+			mascotaNombreDto.setDiscapacidad(datos[5].toString());
+			mascotaNombreDto.setTipoAnimal(datos[6].toString());
+			mascotaNombreDto.setImagenMascota(datos[7].toString());
 		}
 		return mascotaNombreDto;
 	}

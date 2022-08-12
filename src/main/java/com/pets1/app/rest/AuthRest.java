@@ -27,7 +27,7 @@ public class AuthRest {
 	@Autowired
 	private JwtTokenProvider tokenProvider;
 	
-	@PostMapping("/iniciarSecion")
+	@PostMapping("/iniciarSesion")
 	public ResponseEntity<JwtAuthResponceDto> authenticateUser(@RequestBody LoginDto loginDto){
 		
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getNombreoCorreo(), loginDto.getPassword()));

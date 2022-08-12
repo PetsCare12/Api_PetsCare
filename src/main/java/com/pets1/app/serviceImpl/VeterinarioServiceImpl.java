@@ -16,8 +16,9 @@ import com.pets1.app.domain.ClinicaVo;
 import com.pets1.app.domain.RolVo;
 import com.pets1.app.domain.VeterinarioVo;
 import com.pets1.app.dto.answers.VeterinarioAnswerDto;
+import com.pets1.app.dto.answers.VeterinarioPorNombreDto;
+import com.pets1.app.dto.answers.VeterinarioYRolesDto;
 import com.pets1.app.dto.entityData.VeterinarioDto;
-import com.pets1.app.dto.entityData.VeterinarioPorNombreDto;
 import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
 import com.pets1.app.repository.IClinicaRepository;
@@ -144,6 +145,20 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 		return veterinarioPorNombre;
 	}
 	
+	@Override
+	public VeterinarioYRolesDto buscarVeterinarioYRoles(Long documento) {
+		VeterinarioYRolesDto veterinario = new VeterinarioYRolesDto();
+		List<String[]> vete = veterinarioRepository.veterinarioyRoles(documento);
+		
+		for (String[] datos : vete) {
+			veterinario.setDocumento(datos[0].toString());
+			veterinario.setCorreoVt(datos[1].toString());
+			veterinario.setRol(datos[2].toString());
+		}
+		
+		return veterinario;
+	}
+	
 	private VeterinarioDto mapearDto(VeterinarioVo veterinarioVo) {
 		VeterinarioDto veterinarioDto = modelMapper.map(veterinarioVo, VeterinarioDto.class);
 		return veterinarioDto;
@@ -158,4 +173,5 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 		VeterinarioVo veterinarioVo = modelMapper.map(veterinarioDto, VeterinarioVo.class);
 		return veterinarioVo;
 	}
+
 }

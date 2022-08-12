@@ -7,19 +7,19 @@ import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.pets1.app.domain.AgendaVo;
-import com.pets1.app.domain.HistorialAgendaVo;
 import com.pets1.app.domain.UsuarioVo;
 import com.pets1.app.domain.VeterinarioVo;
 import com.pets1.app.dto.answers.AgendaAnswerDto;
 import com.pets1.app.dto.answers.AgendaUsuarioAnswerDto;
 import com.pets1.app.dto.answers.AgendaVeterinarioAnswerDto;
 import com.pets1.app.dto.entityData.AgendaDto;
+import com.pets1.app.exeptions.AppPetsCareExeption;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
 import com.pets1.app.repository.IAgendaRepository;
-import com.pets1.app.repository.IHistorialAgendasRepository;
 import com.pets1.app.repository.IUsuarioRepository;
 import com.pets1.app.repository.IVeterinarioRepository;
 import com.pets1.app.service.IAgendaService;
@@ -38,10 +38,12 @@ public class AgendaServiceImpl implements IAgendaService{
 	private IVeterinarioRepository veterinarioRepository;
 	
 	@Autowired
-	private IHistorialAgendasRepository historialAgendasRepository;
-	
-	@Autowired
 	private ModelMapper modelMapper;
+	
+	private int CREADA = 1;
+	private int ENCURSO = 2;
+	private int CANCELADA = 3;
+	private int FINALIZADA = 4;
 	
 	@Override
 	public void CrearAgenda(Long documentoUsuario, Long documentoVeterinario, AgendaDto agendaDto) {
@@ -51,7 +53,12 @@ public class AgendaServiceImpl implements IAgendaService{
 		AgendaVo datosCita = mapearEntidad(agendaDto);
 		
 		datosCita.setDocumentous(usuario);
-		datosCita.setDocumentovt(veterinario);	
+		datosCita.setDocumentovt(veterinario);
+		
+		if (datosCita.getEstado() != CREADA && datosCita.getEstado() != ENCURSO && datosCita.getEstado() != CANCELADA && datosCita.getEstado() != FINALIZADA){
+			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "El estado no puede ser menor a 1 y mayor de 4");
+		}
+		
 		agendaRepository.save(datosCita);
 	}
 
@@ -80,7 +87,10 @@ public class AgendaServiceImpl implements IAgendaService{
 		AgendaVo agenda = agendaRepository.findById(codigo).orElseThrow(() -> new ResourceNotFoudExeption("agenda", "codigo", codigo));
 		
 		agenda.setFecha(agendaDto.getFecha());
-		agenda.setHora(agendaDto.getHora());
+		agenda.setHoraInicio(agendaDto.getHoraInicio());
+		agenda.setHoraSalida(agendaDto.getHoraSalida());
+		agenda.setNotas(agendaDto.getNotas());
+		agenda.setEstado(agendaDto.getEstado());
 		
 		AgendaVo actualizarAgenda = agendaRepository.save(agenda);
 		return mapearDto(actualizarAgenda);
@@ -89,18 +99,6 @@ public class AgendaServiceImpl implements IAgendaService{
 	@Override
 	public void eliminarAgenda(Long codigo) {
 		AgendaVo agenda = agendaRepository.findById(codigo).orElseThrow(() -> new ResourceNotFoudExeption("agenda", "codigo", codigo));
-		
-//		HistorialAgendaVo historialAgenda = new HistorialAgendaVo();
-		
-//		historialAgenda.setCodigoH(agenda.getCodigoA());
-//		historialAgenda.setFecha(agenda.getFecha());
-//		historialAgenda.setHora(agenda.getHora());
-//		historialAgenda.setDocumentoUsu(agenda.getDocumentous());
-//		historialAgenda.setDocumentoVete(agenda.getDocumentovt());
-		
-//		HistorialAgendaVo res = mapearAgendaVoAHistorial(agenda);
-//		
-//		historialAgendasRepository.save(res);
 		
 		agendaRepository.delete(agenda);
 	}
@@ -129,10 +127,5 @@ public class AgendaServiceImpl implements IAgendaService{
 	private AgendaVo mapearEntidad(AgendaDto agendaDto) {
 		AgendaVo agendaVo = modelMapper.map(agendaDto, AgendaVo.class);
 		return agendaVo;
-	}
-	
-	private HistorialAgendaVo mapearAgendaVoAHistorial(AgendaVo agendaVo) {
-		HistorialAgendaVo historial = modelMapper.map(agendaVo, HistorialAgendaVo.class);
-		return historial;
 	}
 }

@@ -36,13 +36,7 @@ public class ClinicaVo {
 	
 	@Column(name = "correo_cv", nullable = false)
 	private String correoCv;
-	
-	@Column(name = "horario_atencio_cv", nullable = false)
-	private String horario_atencion;
-	
-	@Column(name = "dias_atencion", nullable = false)
-	private String dias_atencion;
-	
+
 	@Column(name = "password_cv", nullable = false)
 	private String passwordCv;
 	
@@ -60,26 +54,29 @@ public class ClinicaVo {
 	@JoinTable(name = "clinica_roles", joinColumns = @JoinColumn(name = "clinica_nit", referencedColumnName = "nit_cv"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private Set<RolVo> roles = new HashSet<>();
 	
+	@JsonBackReference
+	@OneToMany(mappedBy = "nitCli", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<HorariosVo> horarios = new HashSet<>();
+	
 	public ClinicaVo () {
 		
 	}
 
-	public ClinicaVo(Long nit, String nombre, String direccion, String telefono, String correoCv,
-			String horario_atencion, String dias_atencion, String passwordCv, String imagenclinica, int estadoCli,
-			Set<VeterinarioVo> veterinarios, Set<RolVo> roles) {
+	public ClinicaVo(Long nit, String nombre, String direccion, String telefono, String correoCv, String passwordCv,
+			String imagenclinica, int estadoCli, Set<VeterinarioVo> veterinarios, Set<RolVo> roles,
+			Set<HorariosVo> horarios) {
 		super();
 		this.nit = nit;
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.correoCv = correoCv;
-		this.horario_atencion = horario_atencion;
-		this.dias_atencion = dias_atencion;
 		this.passwordCv = passwordCv;
 		this.imagenclinica = imagenclinica;
 		this.estadoCli = estadoCli;
 		this.veterinarios = veterinarios;
 		this.roles = roles;
+		this.horarios = horarios;
 	}
 
 	public Long getNit() {
@@ -122,22 +119,6 @@ public class ClinicaVo {
 		this.correoCv = correoCv;
 	}
 
-	public String getHorario_atencion() {
-		return horario_atencion;
-	}
-
-	public void setHorario_atencion(String horario_atencion) {
-		this.horario_atencion = horario_atencion;
-	}
-
-	public String getDias_atencion() {
-		return dias_atencion;
-	}
-
-	public void setDias_atencion(String dias_atencion) {
-		this.dias_atencion = dias_atencion;
-	}
-
 	public String getPasswordCv() {
 		return passwordCv;
 	}
@@ -178,5 +159,12 @@ public class ClinicaVo {
 		this.roles = roles;
 	}
 
+	public Set<HorariosVo> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(Set<HorariosVo> horarios) {
+		this.horarios = horarios;
+	}
 
 }

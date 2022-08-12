@@ -3,8 +3,8 @@ package com.pets1.app.service;
 import java.util.List;
 
 import com.pets1.app.dto.answers.MascotaAswerDto;
+import com.pets1.app.dto.answers.MascotaPorNombreDto;
 import com.pets1.app.dto.entityData.MascotaDto;
-import com.pets1.app.dto.entityData.MascotaPorNombreDto;
 
 public interface IMascotaService {
 
