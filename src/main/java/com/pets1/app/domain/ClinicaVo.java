@@ -40,7 +40,7 @@ public class ClinicaVo {
 	@Column(name = "password_cv", nullable = false)
 	private String passwordCv;
 	
-	@Column(name = "foto_clinica", nullable = false)
+	@Column(name = "foto_clinica", nullable = false, length = 400)
 	private String imagenclinica;
 	
 	@Column(name = "estado_cli", nullable = false)

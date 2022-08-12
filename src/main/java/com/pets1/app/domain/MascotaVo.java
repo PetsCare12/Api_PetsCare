@@ -43,7 +43,7 @@ public class MascotaVo {
 	@Column(name = "tipoAnimal_mc", nullable = false)
 	private String tipoAnimal;
 	
-	@Column(name = "foto_mascota", nullable = false)
+	@Column(name = "foto_mascota", nullable = false, length = 400)
 	private String imagenMascota;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

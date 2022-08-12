@@ -47,7 +47,7 @@ public class VeterinarioVo {
 	@Column(name = "password_vt", nullable = false) 
 	private String password ;
 	
-	@Column(name = "foto_veterinario", nullable = false)
+	@Column(name = "foto_veterinario", nullable = false, length = 400)
 	private String imagenVete;
 	
 	@Column(name = "estado_vt", nullable = false)

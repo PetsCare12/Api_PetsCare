@@ -44,7 +44,7 @@ public class UsuarioVo {
 	@Column(name = "password_usu", nullable = false)
 	private String passwordUs;
 	
-	@Column(name = "foto_usu", nullable = false)
+	@Column(name = "foto_usu", nullable = false, length = 400)
 	private String imagenUsu;
 	
 	@Column(name = "estado_usu", nullable = false)
