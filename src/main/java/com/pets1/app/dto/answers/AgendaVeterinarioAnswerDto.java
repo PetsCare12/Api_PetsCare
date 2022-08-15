@@ -4,11 +4,17 @@ import com.pets1.app.dto.entityData.UsuarioDto;
 
 public class AgendaVeterinarioAnswerDto {
 	
-private Long codigoA;
+	private Long codigoA;
 	
 	private String fecha;
 	
-	private String hora;
+	private String horaInicio;
+	
+	private String horaSalida;
+	
+	private String notas;
+	
+	private int estado;
 	
 	private UsuarioDto documentous;
 
@@ -28,12 +34,36 @@ private Long codigoA;
 		this.fecha = fecha;
 	}
 
-	public String getHora() {
-		return hora;
+	public String getHoraInicio() {
+		return horaInicio;
 	}
 
-	public void setHora(String hora) {
-		this.hora = hora;
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public String getHoraSalida() {
+		return horaSalida;
+	}
+
+	public void setHoraSalida(String horaSalida) {
+		this.horaSalida = horaSalida;
+	}
+
+	public String getNotas() {
+		return notas;
+	}
+
+	public void setNotas(String notas) {
+		this.notas = notas;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 
 	public UsuarioDto getDocumentous() {

@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pets1.app.dto.answers.VeterinarioAnswerDto;
+import com.pets1.app.dto.answers.VeterinarioPorNombreDto;
+import com.pets1.app.dto.answers.VeterinarioYRolesDto;
 import com.pets1.app.dto.entityData.VeterinarioDto;
-import com.pets1.app.dto.entityData.VeterinarioPorNombreDto;
 import com.pets1.app.service.IVeterinarioService;
 
 @RestController
@@ -46,6 +47,11 @@ public class VeterinarioRest {
 		return veterinario;
 	}
 	
+	@GetMapping("/veterinarios/{documento}/rol")
+	public VeterinarioYRolesDto buscarVeterinarioConRol(@PathVariable Long documento) {
+		return veterinarioService.buscarVeterinarioYRoles(documento);
+	}
+	
 	@PreAuthorize("hasRole('CLINICA')")
 	@PostMapping("/veterinarios/{nitclinica}")
 	public ResponseEntity<String> guardarveterinario(@PathVariable Long nitclinica, @RequestBody VeterinarioDto veterinarioDto){		
@@ -53,7 +59,7 @@ public class VeterinarioRest {
 		return new ResponseEntity<> ("Veterinario registrada con exito", HttpStatus.CREATED);
 	}
 	
-	@PreAuthorize("hasRole('VETERINARIO')")
+	@PreAuthorize("hasAnyRole('VETERINARIO', 'CLINICA')")
 	@PutMapping("/veterinarios/{documento}")
 	public ResponseEntity<String> actualizarVeterinario(@PathVariable Long documento ,@RequestBody VeterinarioDto veterinarioDto){
 		veterinarioService.actualizarVeterinario(documento, veterinarioDto);

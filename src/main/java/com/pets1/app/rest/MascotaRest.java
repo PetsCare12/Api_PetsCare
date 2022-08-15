@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pets1.app.dto.answers.MascotaAswerDto;
+import com.pets1.app.dto.answers.MascotaPorNombreDto;
 import com.pets1.app.dto.entityData.MascotaDto;
-import com.pets1.app.dto.entityData.MascotaPorNombreDto;
 import com.pets1.app.service.IMascotaService;
 
 @RestController

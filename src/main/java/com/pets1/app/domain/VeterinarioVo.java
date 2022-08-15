@@ -47,7 +47,7 @@ public class VeterinarioVo {
 	@Column(name = "password_vt", nullable = false) 
 	private String password ;
 	
-	@Column(name = "foto_veterinario", nullable = false)
+	@Column(name = "foto_veterinario", nullable = false, length = 400)
 	private String imagenVete;
 	
 	@Column(name = "estado_vt", nullable = false)
@@ -65,13 +65,17 @@ public class VeterinarioVo {
 	@JoinTable(name = "veterinarios_roles", joinColumns = @JoinColumn(name = "veterinario_doc", referencedColumnName = "documento_vt"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"))
 	private Set<RolVo> roles = new HashSet<>();
 	
+	@JsonBackReference
+	@OneToMany(mappedBy = "documentovt", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<HorariosVo> horarios = new HashSet<>();
+	
 	public VeterinarioVo () {
 		
 	}
 
 	public VeterinarioVo(Long documento, String nombre, String apellidos, String sexovt, String telefono, String correo,
 			String especialidad, String password, String imagenVete, int estadoVt, ClinicaVo clinica,
-			Set<AgendaVo> agendas, Set<RolVo> roles) {
+			Set<AgendaVo> agendas, Set<RolVo> roles, Set<HorariosVo> horarios) {
 		super();
 		this.documento = documento;
 		this.nombre = nombre;
@@ -86,6 +90,7 @@ public class VeterinarioVo {
 		this.clinica = clinica;
 		this.agendas = agendas;
 		this.roles = roles;
+		this.horarios = horarios;
 	}
 
 	public Long getDocumento() {
@@ -190,5 +195,13 @@ public class VeterinarioVo {
 
 	public void setRoles(Set<RolVo> roles) {
 		this.roles = roles;
+	}
+
+	public Set<HorariosVo> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(Set<HorariosVo> horarios) {
+		this.horarios = horarios;
 	}
 }

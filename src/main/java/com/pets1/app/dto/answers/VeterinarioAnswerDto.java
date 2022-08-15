@@ -30,6 +30,8 @@ public class VeterinarioAnswerDto {
 	private clinicaDto clinica;
 	
 	private Set<AgendaVeterinarioAnswerDto> agendas= new HashSet<>();
+	
+	private Set<HorariosVeterinarioAnswerDto> horarios = new HashSet<>();
 
 	public Long getDocumento() {
 		return documento;
@@ -125,5 +127,13 @@ public class VeterinarioAnswerDto {
 
 	public void setAgendas(Set<AgendaVeterinarioAnswerDto> agendas) {
 		this.agendas = agendas;
+	}
+
+	public Set<HorariosVeterinarioAnswerDto> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(Set<HorariosVeterinarioAnswerDto> horarios) {
+		this.horarios = horarios;
 	}
 }

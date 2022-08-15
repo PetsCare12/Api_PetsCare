@@ -1,4 +1,4 @@
-package com.pets1.app.dto.entityData;
+package com.pets1.app.dto.answers;
 
 
 public class UsuarioPorNombreDto {

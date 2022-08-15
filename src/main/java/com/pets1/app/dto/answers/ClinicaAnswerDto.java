@@ -17,17 +17,15 @@ public class ClinicaAnswerDto {
 	
 	private String correoCv;
 	
-	private String horario_atencion;
-	
-	private String dias_atencion;
-	
 	private String password;
 	
 	private String imagenclinica;
 	
-	private int estdo_cli;
+	private int estadoCli;
 	
 	private Set<VeterinarioDto> veterinarios = new HashSet<>();
+	
+	private Set<HorariosClinicaAnswerDto> horarios = new HashSet<>();
 
 	public Long getNit() {
 		return nit;
@@ -69,22 +67,6 @@ public class ClinicaAnswerDto {
 		this.correoCv = correoCv;
 	}
 
-	public String getHorario_atencion() {
-		return horario_atencion;
-	}
-
-	public void setHorario_atencion(String horario_atencion) {
-		this.horario_atencion = horario_atencion;
-	}
-
-	public String getDias_atencion() {
-		return dias_atencion;
-	}
-
-	public void setDias_atencion(String dias_atencion) {
-		this.dias_atencion = dias_atencion;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -101,12 +83,12 @@ public class ClinicaAnswerDto {
 		this.imagenclinica = imagenclinica;
 	}
 
-	public int getEstdo_cli() {
-		return estdo_cli;
+	public int getEstadoCli() {
+		return estadoCli;
 	}
 
-	public void setEstdo_cli(int estdo_cli) {
-		this.estdo_cli = estdo_cli;
+	public void setEstadoCli(int estadoCli) {
+		this.estadoCli = estadoCli;
 	}
 
 	public Set<VeterinarioDto> getVeterinarios() {
@@ -115,5 +97,13 @@ public class ClinicaAnswerDto {
 
 	public void setVeterinarios(Set<VeterinarioDto> veterinarios) {
 		this.veterinarios = veterinarios;
+	}
+
+	public Set<HorariosClinicaAnswerDto> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(Set<HorariosClinicaAnswerDto> horarios) {
+		this.horarios = horarios;
 	}
 }

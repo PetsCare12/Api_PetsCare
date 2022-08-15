@@ -12,8 +12,11 @@ import com.pets1.app.domain.ClinicaVo;
 @Repository
 public interface IClinicaRepository extends JpaRepository<ClinicaVo, Long>{
 	
-	@Query("SELECT c.nombre, c.direccion, c.telefono, c.correoCv, c.horario_atencion, c.dias_atencion, c.passwordCv, c.imagenclinica FROM ClinicaVo c WHERE c.nombre =:nombre")
+	@Query("SELECT c.nombre, c.direccion, c.telefono, c.correoCv, c.passwordCv, c.imagenclinica FROM ClinicaVo c WHERE c.nombre =:nombre")
 	List<String[]> clinicaPorNombre(@Param("nombre") String nombre);
+	
+	@Query(value = "SELECT c.nit_cv,c.correo_cv,r.rol_id FROM clinica_veterinaria AS c INNER JOIN clinica_roles AS r ON c.nit_cv = r.clinica_nit WHERE c.nit_cv =:nit", nativeQuery = true)
+	List<String[]> clinicayRoles(@Param("nit") Long nit);
 	
 	public Optional<ClinicaVo> findByCorreoCv(String correoCv);
 	

@@ -8,6 +8,10 @@ public class MascotaAswerDto {
 	
 	private String nombre;
 	
+	private String edad;
+	
+	private String sexo;
+	
 	private String raza;
 	
 	private String color;
@@ -21,7 +25,6 @@ public class MascotaAswerDto {
 	private String imagenMascota;
 	
 	private UsuarioDto dueniomascota;
-	
 
 	public Long getCodigo() {
 		return codigo;
@@ -37,6 +40,22 @@ public class MascotaAswerDto {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getEdad() {
+		return edad;
+	}
+
+	public void setEdad(String edad) {
+		this.edad = edad;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	public String getRaza() {
@@ -94,4 +113,5 @@ public class MascotaAswerDto {
 	public void setDueniomascota(UsuarioDto dueniomascota) {
 		this.dueniomascota = dueniomascota;
 	}
+	
 }

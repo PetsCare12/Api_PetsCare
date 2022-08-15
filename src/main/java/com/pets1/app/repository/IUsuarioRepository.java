@@ -16,8 +16,8 @@ public interface IUsuarioRepository extends JpaRepository<UsuarioVo, Long>{
 	@Query("SELECT u.nombreUs, u.apellidoUs, u.sexoUs, u.telefonoUs, u.correoUs, u.passwordUs, u.imagenUsu FROM UsuarioVo u WHERE u.nombreUs =:nombre")
 	List<String[]> usuarioPorNombre(@Param("nombre") String nombre);
 	
-//	@Query(value = "SELECT u.nombre_usu,u.correo_usu,u.telefono_usu,m.nombre_mc,m.raza_mc,m.tipo_animal_mc FROM usuarios AS u INNER JOIN mascotas AS m ON u.documento_usu = m.documento_usu WHERE u.documento_usu =:documento", nativeQuery = true)
-//	List<String[]> usuarioMascota(@Param("documento") Long documento);
+	@Query(value = "SELECT u.documento_usu,u.correo_usu,r.rol_id FROM usuarios AS u INNER JOIN usuario_roles AS r ON u.documento_usu = r.usuario_doc WHERE u.documento_usu =:documento", nativeQuery = true)
+	List<String[]> usuarioyRoles(@Param("documento") Long documento);
 	
 //	@Query("SELECT m FROM MascotaVo m WHERE m.documentoUs =:documento")
 //	List<MascotaVo> listaMascotas(@Param("documento") Long documento);

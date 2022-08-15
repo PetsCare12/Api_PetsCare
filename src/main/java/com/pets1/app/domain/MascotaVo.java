@@ -22,6 +22,12 @@ public class MascotaVo {
 	@Column(name = "nombre_mc", nullable = false)
 	private String nombre;
 	
+	@Column(name = "edad_mc", nullable = false)
+	private String edad;
+	
+	@Column(name = "sexo_mc", nullable = false)
+	private String sexo;
+	
 	@Column(name = "raza_mc", nullable = false)
 	private String raza;
 	
@@ -37,7 +43,7 @@ public class MascotaVo {
 	@Column(name = "tipoAnimal_mc", nullable = false)
 	private String tipoAnimal;
 	
-	@Column(name = "foto_mascota", nullable = false)
+	@Column(name = "foto_mascota", nullable = false, length = 400)
 	private String imagenMascota;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -48,11 +54,13 @@ public class MascotaVo {
 		
 	}
 
-	public MascotaVo(Long codigo, String nombre, String raza, String color, double peso, String discapacidad,
-			String tipoAnimal, String imagenMascota, UsuarioVo dueniomascota) {
+	public MascotaVo(Long codigo, String nombre, String edad, String sexo, String raza, String color, double peso,
+			String discapacidad, String tipoAnimal, String imagenMascota, UsuarioVo dueniomascota) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
+		this.edad = edad;
+		this.sexo = sexo;
 		this.raza = raza;
 		this.color = color;
 		this.peso = peso;
@@ -76,6 +84,22 @@ public class MascotaVo {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getEdad() {
+		return edad;
+	}
+
+	public void setEdad(String edad) {
+		this.edad = edad;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	public String getRaza() {
@@ -132,5 +156,5 @@ public class MascotaVo {
 
 	public void setDueniomascota(UsuarioVo dueniomascota) {
 		this.dueniomascota = dueniomascota;
-	}	
+	}
 }
