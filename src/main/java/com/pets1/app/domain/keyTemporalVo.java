@@ -6,11 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "key_temporal")
+@Table(name = "keytemporal")
 public class keyTemporalVo {
 	
 	@Id
-	@Column(name = "key", nullable = false)
+	@Column(name = "keyusu", nullable = false)
 	private String key;
 	
 	@Column(name = "correo", nullable = false)

@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pets1.app.domain.UsuarioVo;
+import com.pets1.app.domain.keyTemporalVo;
 import com.pets1.app.dto.answers.KeyTemporalAnswerDto;
 import com.pets1.app.dto.entityData.RecuperarContrasenaDto;
 import com.pets1.app.exeptions.ResourceNotFoudExeption;
@@ -43,17 +43,27 @@ public class RecuperarContrasenaServiceImpl implements IRecuperarContrasenaServi
 		boolean Veterinario = veterinarioRepository.findByCorreo(correoUs.getCorreo()).isPresent();
 		boolean clinica = clinicaRepository.findByCorreoCv(correoUs.getCorreo()).isPresent();
 		
+		keyTemporalVo keyTemporal = new keyTemporalVo();
+		
 		if(usuario==false && Veterinario==false && clinica==false) {
 			throw new ResourceNotFoudExeption("usuario", "correo", correoUs.getCorreo());
 		}
 		else {
 			RandomKeyGenerator generator = new RandomKeyGenerator();
 			String key = generator.clave();
+		
+			keyTemporal.setKey(key);
+			keyTemporal.setCorreo(correoUs.getCorreo());
 			
+			keyTemporalRepository.save(keyTemporal);
 		}
 		
+		return mapearKeyDto(keyTemporal);
+	}
 		
-		return null;
+	private KeyTemporalAnswerDto mapearKeyDto(keyTemporalVo keyTemporalVo) {
+		KeyTemporalAnswerDto key = modelMapper.map(keyTemporalVo, KeyTemporalAnswerDto.class);
+		return key;
 	}
 	
 }

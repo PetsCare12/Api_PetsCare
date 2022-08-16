@@ -42,7 +42,7 @@ public class UsuarioRest {
 		return ResponseEntity.ok(usuarioService.buscarUsuarioPorDocumento(documento));
 	}
 	
-	@GetMapping("/usuarios/{documento}/mascotas")
+	@GetMapping("/usuarios/{documento}/mascotas")			
 	public ResponseEntity<UsuarioAnswerDto> buuscarUsuarioConMascotas(@PathVariable Long documento){
 		return new ResponseEntity<>(usuarioService.buscarUsuarioConMascotas(documento), HttpStatus.OK);
 	}
