@@ -100,10 +100,6 @@ public class RecuperarContrasenaServiceImpl implements IRecuperarContrasenaServi
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + tipo);
 			}
-			
-		
-			
-		
 		}
 		else {
 			throw new AppPetsCareExeption(HttpStatus.NOT_FOUND, "los datos son incompatibles revise la key y el correo");
