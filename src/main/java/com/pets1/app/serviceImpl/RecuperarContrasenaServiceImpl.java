@@ -1,5 +1,8 @@
 package com.pets1.app.serviceImpl;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -66,6 +69,21 @@ public class RecuperarContrasenaServiceImpl implements IRecuperarContrasenaServi
 			keyTemporal.setCorreo(correoUs.getCorreo());
 			
 			keyTemporalRepository.save(keyTemporal);
+			
+			//SE INICAL EL PROCESO DE EXPIRACION DE LA KEY
+			Timer time = new Timer();
+			TimerTask tarea = new TimerTask() {
+
+				@Override
+				public void run() {
+					keyTemporalRepository.delete(keyTemporal);
+					System.out.println("esta es la key" + key);
+					time.cancel();
+				}
+			};
+
+			time.schedule(tarea, 9000000);
+			
 		}
 		
 		return mapearKeyDto(keyTemporal);

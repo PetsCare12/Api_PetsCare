@@ -26,25 +26,5 @@ public class RandomKeyGenerator {
 
 	    return sb.toString();
 	}
-	
-	
-//	Timer timer;
-//
-//    public RandomKeyGenerator(int seconds) {
-//        timer = new Timer();
-//        timer.schedule(new StopTask(), seconds * 1000);
-//    }
-//
-//    public static void main(String[] args) {
-//        new RandomKeyGenerator(10);
-//        System.out.println("StopWatch Started.");
-//    }
-//
-//    class StopTask extends TimerTask {
-//        public void run() {
-//            System.out.println("Time Up! "+new Date());
-//            timer.cancel();
-//        }
-//    }
 
 }
