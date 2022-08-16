@@ -81,7 +81,7 @@ public class RecuperarContrasenaServiceImpl implements IRecuperarContrasenaServi
 				}
 			};
 
-			time.schedule(tarea, 9000000);
+			time.schedule(tarea, 900000);
 			
 		}
 		
