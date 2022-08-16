@@ -72,24 +72,28 @@ public class RecuperarContrasenaServiceImpl implements IRecuperarContrasenaServi
 	}
 
 	@Override
-	public void cambiarContrasenaKey(CambiarCotrasenaDto cambiarCotrasenaDto, String key) {
+	public void cambiarContrasenaKey(CambiarCotrasenaDto cambiarContrasenaDto, String key) {
 		keyTemporalVo keyTemporal = keyTemporalRepository.findById(key).orElseThrow(() -> new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "la  key temporal no exite"));
 		
-		if(key.equals(keyTemporal.getKey()) && cambiarCotrasenaDto.getCorreo().equals(keyTemporal.getCorreo()) ) {
-			String tipo = ConsultarUsuario(cambiarCotrasenaDto.getCorreo());
+		if(key.equals(keyTemporal.getKey()) && cambiarContrasenaDto.getCorreo().equals(keyTemporal.getCorreo()) ) {
+			String tipo = ConsultarUsuario(cambiarContrasenaDto.getCorreo());
 			switch (tipo) {
 			case "usuario": {
-				UsuarioVo usuario = usuarioRepository.findByCorreoUs(cambiarCotrasenaDto.getCorreo()).orElseThrow(() -> new ResourceNotFoudExeption("usuario", "correo", cambiarCotrasenaDto.getCorreo()));
-				usuario.setPasswordUs(passwordEncoder.encode(cambiarCotrasenaDto.getNuevaContrasena()));
+				UsuarioVo usuario = usuarioRepository.findByCorreoUs(cambiarContrasenaDto.getCorreo()).orElseThrow(() -> new ResourceNotFoudExeption("usuario", "correo", cambiarContrasenaDto.getCorreo()));
+				usuario.setPasswordUs(passwordEncoder.encode(cambiarContrasenaDto.getNuevaContrasena()));
 				usuarioRepository.save(usuario);
 				break;
 			}
 			case "veterinario":{
-				VeterinarioVo veterinario = veterinarioRepository.findByCorreo(cambiarCotrasenaDto.getCorreo()).orElseThrow(() -> new ResourceNotFoudExeption("vaterinario", "correo", cambiarCotrasenaDto.getCorreo()));
+				VeterinarioVo veterinario = veterinarioRepository.findByCorreo(cambiarContrasenaDto.getCorreo()).orElseThrow(() -> new ResourceNotFoudExeption("vaterinario", "correo", cambiarContrasenaDto.getCorreo()));
+				veterinario.setPassword(passwordEncoder.encode(cambiarContrasenaDto.getNuevaContrasena()));
+				veterinarioRepository.save(veterinario);
 				break;
 			}
 			case "clinica":{
-				ClinicaVo clinica = clinicaRepository.findByCorreoCv(cambiarCotrasenaDto.getCorreo()).orElseThrow(() -> new ResourceNotFoudExeption("clinica", "correo", cambiarCotrasenaDto.getCorreo()));
+				ClinicaVo clinica = clinicaRepository.findByCorreoCv(cambiarContrasenaDto.getCorreo()).orElseThrow(() -> new ResourceNotFoudExeption("clinica", "correo", cambiarContrasenaDto.getCorreo()));
+				clinica.setPasswordCv(passwordEncoder.encode(cambiarContrasenaDto.getNuevaContrasena()));
+				clinicaRepository.save(clinica);
 				break;
 			}
 			
@@ -119,7 +123,7 @@ public class RecuperarContrasenaServiceImpl implements IRecuperarContrasenaServi
 		else if(veterinario == true) {
 			tipo = "veterinario";
 		}
-		else if(usuario == true) {
+		else if(clinica == true) {
 			tipo = "clinica";
 		}
 		else {
