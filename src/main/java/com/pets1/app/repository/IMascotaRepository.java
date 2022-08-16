@@ -1,6 +1,7 @@
 package com.pets1.app.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +17,7 @@ public interface IMascotaRepository extends JpaRepository<MascotaVo, Long>{
 	List<String[]> mascotaPorNombre(@Param("nombre") String nombre);
 	
 	public List<MascotaVo> findByDueniomascotaDocumentoUs(Long usuarioDocumento);
+	
+	public Optional<MascotaVo> findByNombre(String nombre);
 
 }

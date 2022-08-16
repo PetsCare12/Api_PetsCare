@@ -125,6 +125,8 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	@Override
 	public UsuarioPorNombreDto buscarUsuarioPorNombre(String nombre) {
 		
+		UsuarioVo usuariosRep = usuarioRepository.findByNombreUs(nombre).orElseThrow(() -> new ResourceNotFoudExeption("Usuario", "nombre", nombre));
+		
 		UsuarioPorNombreDto usuarioDto = new UsuarioPorNombreDto();
 		
 		List<String[]> usuario = usuarioRepository.usuarioPorNombre(nombre);
