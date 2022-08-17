@@ -118,6 +118,8 @@ public class ClinicaServiceImpl implements IClinicaService{
 	@Override
 	public ClinicaPorNombreDto buscarClinicaPorNombre(String nombre) {
 		
+		ClinicaVo clinicasRep = clinicaRepository.findByNombre(nombre).orElseThrow(() -> new ResourceNotFoudExeption("Clinica", "Nombre", nombre));
+		
 		ClinicaPorNombreDto clinicaPorNombreDto = new ClinicaPorNombreDto();
 		
 		List<String[]> clinica = clinicaRepository.clinicaPorNombre(nombre);
@@ -127,8 +129,8 @@ public class ClinicaServiceImpl implements IClinicaService{
 			clinicaPorNombreDto.setDireccion(datos[1].toString());
 			clinicaPorNombreDto.setTelefono(datos[2].toString());
 			clinicaPorNombreDto.setCorreoCv(datos[3].toString());
-			clinicaPorNombreDto.setPassword(datos[6].toString());
-			clinicaPorNombreDto.setImagenclinica(datos[7].toString());
+			clinicaPorNombreDto.setPassword(datos[4].toString());
+			clinicaPorNombreDto.setImagenclinica(datos[5].toString());
 		}
 		return clinicaPorNombreDto;
 	}

@@ -128,6 +128,8 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 	@Override
 	public VeterinarioPorNombreDto buscarVeterinarioPorNombre(String nombre) {
 		
+		VeterinarioVo vete = veterinarioRepository.findByNombre(nombre).orElseThrow(() -> new ResourceNotFoudExeption("Veterinario", "nombre", nombre));
+		
 		VeterinarioPorNombreDto veterinarioPorNombre = new VeterinarioPorNombreDto();
 		
 		List<String[]> veterinario = veterinarioRepository.veterinarioPorNombre(nombre);
