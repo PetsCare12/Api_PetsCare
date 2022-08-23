@@ -53,6 +53,11 @@ public class ClinicaRest {
 		return clinicaService.buscarClinicaYRol(nit);
 	}
 	
+	@GetMapping("/clinicas/correo/{correo}")
+	public ResponseEntity<clinicaDto> buscarUsuarioPorCorreo(@PathVariable String correo) {
+		return ResponseEntity.ok(clinicaService.buscarClinicaPorCorreo(correo));
+	}
+	
 	@PostMapping("/clinicas")
 	public ResponseEntity<String> guardarClinica(@Valid @RequestBody clinicaDto clinicaDto){	
 		clinicaService.crearClinica(clinicaDto);

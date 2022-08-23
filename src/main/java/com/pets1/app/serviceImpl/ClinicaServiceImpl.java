@@ -149,6 +149,12 @@ public class ClinicaServiceImpl implements IClinicaService{
 		return clinica;
 	}
 	
+	@Override
+	public clinicaDto buscarClinicaPorCorreo(String correo) {
+		ClinicaVo clinica = clinicaRepository.findByCorreoCv(correo).orElseThrow(() -> new ResourceNotFoudExeption("clinica", "correo", correo));
+		return mapearDto(clinica);
+	}
+	
 	private clinicaDto mapearDto(ClinicaVo clinica) {
 		clinicaDto clinicaDTO = modelMapper.map(clinica, clinicaDto.class);
 		return clinicaDTO;
@@ -163,5 +169,4 @@ public class ClinicaServiceImpl implements IClinicaService{
 		ClinicaVo clinica = modelMapper.map(clinicaDto, ClinicaVo.class);
 		return clinica;
 	}
-
 }
