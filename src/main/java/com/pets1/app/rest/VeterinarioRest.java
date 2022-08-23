@@ -30,6 +30,11 @@ public class VeterinarioRest {
 	@Autowired
 	private IVeterinarioService veterinarioService;
 	
+	@GetMapping("/veterinarios")
+	public List<VeterinarioAnswerDto> buscarTodosLosVeterinarios(){
+		return veterinarioService.buscarTodosLosVeterinarios();
+	}
+	
 	@GetMapping("/clinica/{nitclinica}/veterinarios")
 	public List<VeterinarioAnswerDto> listaVeterinario(@PathVariable Long nitclinica){
 		return veterinarioService.listaDeVeterinariosPorClinica(nitclinica);

@@ -11,6 +11,8 @@ public interface IVeterinarioService {
 
 	void guardarVeterinarios(Long nitClinica, VeterinarioDto veterinarioDto);
 	
+	List<VeterinarioAnswerDto> buscarTodosLosVeterinarios();
+	
 	List<VeterinarioAnswerDto> listaDeVeterinariosPorClinica(Long nitClinica);
 	
 	VeterinarioDto buscarVeterinarioId(Long documentoVeterinario);
