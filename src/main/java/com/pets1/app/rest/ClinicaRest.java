@@ -54,7 +54,7 @@ public class ClinicaRest {
 	}
 	
 	@GetMapping("/clinicas/correo/{correo}")
-	public ResponseEntity<clinicaDto> buscarUsuarioPorCorreo(@PathVariable String correo) {
+	public ResponseEntity<clinicaDto> buscarClinicaPorCorreo(@PathVariable String correo) {
 		return ResponseEntity.ok(clinicaService.buscarClinicaPorCorreo(correo));
 	}
 	

@@ -26,4 +26,6 @@ public interface IVeterinarioService {
 	VeterinarioPorNombreDto buscarVeterinarioPorNombre(String nombre);
 	
 	VeterinarioYRolesDto buscarVeterinarioYRoles(Long documento);
+	
+	VeterinarioDto buscarVeterinarioPorCorreo(String correo);
 }

@@ -169,6 +169,12 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 		return veterinario;
 	}
 	
+	@Override
+	public VeterinarioDto buscarVeterinarioPorCorreo(String correo) {
+		VeterinarioVo veterinario = veterinarioRepository.findByCorreo(correo).orElseThrow(() -> new ResourceNotFoudExeption("veterinario", "correo", correo));
+		return mapearDto(veterinario);
+	}
+	
 	private VeterinarioDto mapearDto(VeterinarioVo veterinarioVo) {
 		VeterinarioDto veterinarioDto = modelMapper.map(veterinarioVo, VeterinarioDto.class);
 		return veterinarioDto;
@@ -183,5 +189,4 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 		VeterinarioVo veterinarioVo = modelMapper.map(veterinarioDto, VeterinarioVo.class);
 		return veterinarioVo;
 	}
-
 }

@@ -57,6 +57,11 @@ public class VeterinarioRest {
 		return veterinarioService.buscarVeterinarioYRoles(documento);
 	}
 	
+	@GetMapping("/veterinarios/correo/{correo}")
+	public ResponseEntity<VeterinarioDto> buscarVeterinarioPorCorreo(@PathVariable String correo) {
+		return ResponseEntity.ok(veterinarioService.buscarVeterinarioPorCorreo(correo));
+	}
+	
 	@PreAuthorize("hasRole('CLINICA')")
 	@PostMapping("/veterinarios/{nitclinica}")
 	public ResponseEntity<String> guardarveterinario(@PathVariable Long nitclinica, @RequestBody VeterinarioDto veterinarioDto){		
