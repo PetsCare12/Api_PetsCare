@@ -158,6 +158,13 @@ public class UsuarioServiceImpl implements IUsuarioService{
 		return usuario;
 	}
 	
+	@Override
+	public UsuarioDto buscarPorCorreo(String correo) {
+		UsuarioVo usuario = usuarioRepository.findByCorreoUs(correo).orElseThrow(() -> new ResourceNotFoudExeption("usuario", "correo", correo));
+		return mapearDto(usuario);
+	}
+
+	
 	private UsuarioDto mapearDto(UsuarioVo usuario) {
 		UsuarioDto usuarioDTO = modelMapper.map(usuario, UsuarioDto.class);
 		return usuarioDTO;
@@ -172,5 +179,4 @@ public class UsuarioServiceImpl implements IUsuarioService{
 		UsuarioVo usuario = modelMapper.map(usuarioDto, UsuarioVo.class);
 		return usuario;
 	}
-
 }

@@ -58,6 +58,11 @@ public class UsuarioRest {
 		UsuarioyRolesDto usuario = usuarioService.buscarUsaurioConRol(documento);
 		return usuario;
 	}
+	
+	@GetMapping("/usuarios/correo/{correo}")
+	public ResponseEntity<UsuarioDto> buscarUsuarioPorCorreo(@PathVariable String correo) {
+		return ResponseEntity.ok(usuarioService.buscarPorCorreo(correo));
+	}
 
 	@PostMapping("/usuarios")
 	public ResponseEntity<String> guardarUsuario(@Valid @RequestBody UsuarioDto usuarioDto){	

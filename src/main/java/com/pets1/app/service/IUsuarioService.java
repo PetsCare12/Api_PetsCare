@@ -26,4 +26,6 @@ public interface IUsuarioService {
 	UsuarioPorNombreDto buscarUsuarioPorNombre(String nombre);
 	
 	UsuarioyRolesDto buscarUsaurioConRol(Long documento);
+	
+	UsuarioDto buscarPorCorreo(String correo);
 }
