@@ -23,6 +23,8 @@ public class ClinicaAnswerDto {
 	
 	private int estadoCli;
 	
+	private String tarifa;
+	
 	private Set<VeterinarioDto> veterinarios = new HashSet<>();
 	
 	private Set<HorariosClinicaAnswerDto> horarios = new HashSet<>();
@@ -89,6 +91,14 @@ public class ClinicaAnswerDto {
 
 	public void setEstadoCli(int estadoCli) {
 		this.estadoCli = estadoCli;
+	}
+
+	public String getTarifa() {
+		return tarifa;
+	}
+
+	public void setTarifa(String tarifa) {
+		this.tarifa = tarifa;
 	}
 
 	public Set<VeterinarioDto> getVeterinarios() {

@@ -23,7 +23,9 @@ public class clinicaDto {
 	
 	private String imagenclinica;
 	
-	private int estadoCli;	
+	private int estadoCli;
+	
+	private String tarifa;
 
 	public clinicaDto() {
 		super();
@@ -92,5 +94,12 @@ public class clinicaDto {
 	public void setEstadoCli(int estadoCli) {
 		this.estadoCli = estadoCli;
 	}
-		
+
+	public String getTarifa() {
+		return tarifa;
+	}
+
+	public void setTarifa(String tarifa) {
+		this.tarifa = tarifa;
+	}
 }
