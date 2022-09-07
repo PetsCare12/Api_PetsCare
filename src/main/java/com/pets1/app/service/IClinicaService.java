@@ -24,4 +24,6 @@ public interface IClinicaService {
 	ClinicaPorNombreDto buscarClinicaPorNombre(String nombre);
 	
 	ClinicayRolDto buscarClinicaYRol(Long nit);
+	
+	clinicaDto buscarClinicaPorCorreo(String correo);
 }

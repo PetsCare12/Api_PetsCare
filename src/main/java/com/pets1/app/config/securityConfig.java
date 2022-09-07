@@ -62,6 +62,8 @@ public class securityConfig  extends WebSecurityConfigurerAdapter{
 		.antMatchers("/api/auth/**").permitAll()
 		.antMatchers(HttpMethod.POST ,"/api/usuarios/**").permitAll()
 		.antMatchers(HttpMethod.POST, "/api/clinicas/**").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/generarkey/**").permitAll()
+		.antMatchers(HttpMethod.PUT, "/api/actualizar/contrasena/**").permitAll()
 		.anyRequest()
 		.authenticated();
 		http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);

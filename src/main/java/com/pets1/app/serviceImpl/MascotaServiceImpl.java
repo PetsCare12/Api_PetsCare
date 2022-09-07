@@ -43,8 +43,8 @@ public class MascotaServiceImpl implements IMascotaService{
 		
 		int edad = Integer.parseInt(mascota.getEdad());
 		
-		if (edad <= 0 || edad > 20) {
-			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "La Edad no puede ser menor a 0 y mayor de 20");
+		if (edad <= 0 || edad > 50) {
+			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "La Edad no puede ser menor a 0 y mayor de 50");
 		}
 		
 		mascotaRepository.save(mascota);	
@@ -109,6 +109,8 @@ public class MascotaServiceImpl implements IMascotaService{
 	
 	@Override
 	public MascotaPorNombreDto buscarMascotaPorNombre(String nombre) {
+		
+		MascotaVo mas = mascotaRepository.findByNombre(nombre).orElseThrow(() -> new ResourceNotFoudExeption("Mascota", "nombre", nombre));
 		
 		MascotaPorNombreDto mascotaNombreDto = new MascotaPorNombreDto();
 		

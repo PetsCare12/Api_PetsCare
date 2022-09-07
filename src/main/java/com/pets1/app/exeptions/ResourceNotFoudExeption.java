@@ -11,12 +11,20 @@ public class ResourceNotFoudExeption extends RuntimeException{
 	private String nombreDelRecurso;
 	private String nombreDelCampo;
 	private Long valorDelCampo;
+	private String valorDelCorreo;
 	
 	public ResourceNotFoudExeption(String nombreDelRecurso, String nombreDelCampo, Long valorDelCampo) {
 		super(String.format("%s no encontrada con : %s : %s", nombreDelRecurso, nombreDelCampo, valorDelCampo));
 		this.nombreDelRecurso = nombreDelRecurso;
 		this.nombreDelCampo = nombreDelCampo;
 		this.valorDelCampo = valorDelCampo;
+	}
+	
+	public ResourceNotFoudExeption(String nombreDelRecurso, String nombreDelCampo, String valorDelCorreo) {
+		super(String.format("%s no encontrada con : %s : %s", nombreDelRecurso, nombreDelCampo, valorDelCorreo));
+		this.nombreDelRecurso = nombreDelRecurso;
+		this.nombreDelCampo = nombreDelCampo;
+		this.valorDelCorreo = valorDelCorreo;
 	}
 
 	public String getNombreDelRecurso() {

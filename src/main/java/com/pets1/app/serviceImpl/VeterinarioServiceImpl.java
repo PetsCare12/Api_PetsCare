@@ -54,13 +54,15 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 		
 		boolean vete = veterinarioRepository.findById(veterinarioDto.getDocumento()).isPresent();
 		
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		
 		if (vete == true) {
 			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "el veterinario ya existe con este documento");
 		}
 		else if (veterinarioRepository.existsByCorreo(veterinarioDto.getCorreo())) {
 			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "Ya existe un veterinario con este correo" );
 		}
-		
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		VeterinarioVo veterinario = mapearEntidad(veterinarioDto);
 		veterinario.setClinica(clinica);
 		veterinario.setPassword(passwordEncoder.encode(veterinarioDto.getPassword()));
@@ -68,11 +70,17 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 		if (veterinario.getEstadoVt() != ACTIVO && veterinario.getEstadoVt() != INACTIVO) {
 			throw new AppPetsCareExeption(HttpStatus.BAD_REQUEST, "El estado no puede ser mayor a 2 y menor de 1");
 		}
-		
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		RolVo rol = rolRepository.findByNombre("ROLE_VETERINARIO").get();
 		veterinario.setRoles(Collections.singleton(rol));
-		
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		veterinarioRepository.save(veterinario);
+	}
+	
+	@Override
+	public List<VeterinarioAnswerDto> buscarTodosLosVeterinarios() {
+		List<VeterinarioVo> veterinarios = veterinarioRepository.findAll();
+		return veterinarios.stream().map(vetterinario -> mapearAnswerDto(vetterinario)).collect(Collectors.toList());
 	}
 
 	@Override
@@ -128,6 +136,8 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 	@Override
 	public VeterinarioPorNombreDto buscarVeterinarioPorNombre(String nombre) {
 		
+		VeterinarioVo vete = veterinarioRepository.findByNombre(nombre).orElseThrow(() -> new ResourceNotFoudExeption("Veterinario", "nombre", nombre));
+		
 		VeterinarioPorNombreDto veterinarioPorNombre = new VeterinarioPorNombreDto();
 		
 		List<String[]> veterinario = veterinarioRepository.veterinarioPorNombre(nombre);
@@ -159,6 +169,12 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 		return veterinario;
 	}
 	
+	@Override
+	public VeterinarioDto buscarVeterinarioPorCorreo(String correo) {
+		VeterinarioVo veterinario = veterinarioRepository.findByCorreo(correo).orElseThrow(() -> new ResourceNotFoudExeption("veterinario", "correo", correo));
+		return mapearDto(veterinario);
+	}
+	
 	private VeterinarioDto mapearDto(VeterinarioVo veterinarioVo) {
 		VeterinarioDto veterinarioDto = modelMapper.map(veterinarioVo, VeterinarioDto.class);
 		return veterinarioDto;
@@ -173,5 +189,4 @@ public class VeterinarioServiceImpl implements IVeterinarioService{
 		VeterinarioVo veterinarioVo = modelMapper.map(veterinarioDto, VeterinarioVo.class);
 		return veterinarioVo;
 	}
-
 }

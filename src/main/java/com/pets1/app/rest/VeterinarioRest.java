@@ -30,6 +30,11 @@ public class VeterinarioRest {
 	@Autowired
 	private IVeterinarioService veterinarioService;
 	
+	@GetMapping("/veterinarios")
+	public List<VeterinarioAnswerDto> buscarTodosLosVeterinarios(){
+		return veterinarioService.buscarTodosLosVeterinarios();
+	}
+	
 	@GetMapping("/clinica/{nitclinica}/veterinarios")
 	public List<VeterinarioAnswerDto> listaVeterinario(@PathVariable Long nitclinica){
 		return veterinarioService.listaDeVeterinariosPorClinica(nitclinica);
@@ -50,6 +55,11 @@ public class VeterinarioRest {
 	@GetMapping("/veterinarios/{documento}/rol")
 	public VeterinarioYRolesDto buscarVeterinarioConRol(@PathVariable Long documento) {
 		return veterinarioService.buscarVeterinarioYRoles(documento);
+	}
+	
+	@GetMapping("/veterinarios/correo/{correo}")
+	public ResponseEntity<VeterinarioDto> buscarVeterinarioPorCorreo(@PathVariable String correo) {
+		return ResponseEntity.ok(veterinarioService.buscarVeterinarioPorCorreo(correo));
 	}
 	
 	@PreAuthorize("hasRole('CLINICA')")

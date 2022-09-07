@@ -53,12 +53,14 @@ public class HorariosRest {
 		return new ResponseEntity<> ("Horario de la clinica creada con exito", HttpStatus.CREATED);
 	}
 	
+	@PreAuthorize("hasAnyRole('VETERINARIO', 'CLINICA')")
 	@PutMapping("/horarios/{id}")
 	public ResponseEntity<String> actualizarHorarios(@PathVariable Long id ,@RequestBody HorariosDto horariosDto){
 		horariosService.actualizarHorarios(id, horariosDto);		
 		return new ResponseEntity<>("Horario actualizada con exito", HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('VETERINARIO', 'CLINICA')")
 	@DeleteMapping("/horarios/{id}")
 	public ResponseEntity<String> eliminarHorarios(@PathVariable Long id){
 		horariosService.eliminarHorarios(id);

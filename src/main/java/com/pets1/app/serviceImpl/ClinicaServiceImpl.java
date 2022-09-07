@@ -91,6 +91,7 @@ public class ClinicaServiceImpl implements IClinicaService{
 		clinica.setCorreoCv(clinicaDto.getCorreoCv());
 		clinica.setPasswordCv(passwordEncoder.encode(clinicaDto.getPassword()));
 		clinica.setImagenclinica(clinicaDto.getImagenclinica());
+		clinica.setTarifa(clinicaDto.getTarifa());
 		
 		ClinicaVo clinicaActualizada = clinicaRepository.save(clinica);
 		
@@ -118,6 +119,8 @@ public class ClinicaServiceImpl implements IClinicaService{
 	@Override
 	public ClinicaPorNombreDto buscarClinicaPorNombre(String nombre) {
 		
+		ClinicaVo clinicasRep = clinicaRepository.findByNombre(nombre).orElseThrow(() -> new ResourceNotFoudExeption("Clinica", "Nombre", nombre));
+		
 		ClinicaPorNombreDto clinicaPorNombreDto = new ClinicaPorNombreDto();
 		
 		List<String[]> clinica = clinicaRepository.clinicaPorNombre(nombre);
@@ -127,8 +130,9 @@ public class ClinicaServiceImpl implements IClinicaService{
 			clinicaPorNombreDto.setDireccion(datos[1].toString());
 			clinicaPorNombreDto.setTelefono(datos[2].toString());
 			clinicaPorNombreDto.setCorreoCv(datos[3].toString());
-			clinicaPorNombreDto.setPassword(datos[6].toString());
-			clinicaPorNombreDto.setImagenclinica(datos[7].toString());
+			clinicaPorNombreDto.setPassword(datos[4].toString());
+			clinicaPorNombreDto.setImagenclinica(datos[5].toString());
+			clinicaPorNombreDto.setTarifa(datos[6].toString());
 		}
 		return clinicaPorNombreDto;
 	}
@@ -147,6 +151,12 @@ public class ClinicaServiceImpl implements IClinicaService{
 		return clinica;
 	}
 	
+	@Override
+	public clinicaDto buscarClinicaPorCorreo(String correo) {
+		ClinicaVo clinica = clinicaRepository.findByCorreoCv(correo).orElseThrow(() -> new ResourceNotFoudExeption("clinica", "correo", correo));
+		return mapearDto(clinica);
+	}
+	
 	private clinicaDto mapearDto(ClinicaVo clinica) {
 		clinicaDto clinicaDTO = modelMapper.map(clinica, clinicaDto.class);
 		return clinicaDTO;
@@ -161,5 +171,4 @@ public class ClinicaServiceImpl implements IClinicaService{
 		ClinicaVo clinica = modelMapper.map(clinicaDto, ClinicaVo.class);
 		return clinica;
 	}
-
 }

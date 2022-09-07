@@ -13,6 +13,8 @@ public class ClinicaPorNombreDto {
 	private String password;
 	
 	private String imagenclinica;
+	
+	private String tarifa;
 
 	public String getNombre() {
 		return nombre;
@@ -60,5 +62,13 @@ public class ClinicaPorNombreDto {
 
 	public void setImagenclinica(String imagenclinica) {
 		this.imagenclinica = imagenclinica;
+	}
+
+	public String getTarifa() {
+		return tarifa;
+	}
+
+	public void setTarifa(String tarifa) {
+		this.tarifa = tarifa;
 	}
 }

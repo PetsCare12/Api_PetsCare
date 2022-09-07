@@ -11,6 +11,8 @@ public interface IVeterinarioService {
 
 	void guardarVeterinarios(Long nitClinica, VeterinarioDto veterinarioDto);
 	
+	List<VeterinarioAnswerDto> buscarTodosLosVeterinarios();
+	
 	List<VeterinarioAnswerDto> listaDeVeterinariosPorClinica(Long nitClinica);
 	
 	VeterinarioDto buscarVeterinarioId(Long documentoVeterinario);
@@ -24,4 +26,6 @@ public interface IVeterinarioService {
 	VeterinarioPorNombreDto buscarVeterinarioPorNombre(String nombre);
 	
 	VeterinarioYRolesDto buscarVeterinarioYRoles(Long documento);
+	
+	VeterinarioDto buscarVeterinarioPorCorreo(String correo);
 }
