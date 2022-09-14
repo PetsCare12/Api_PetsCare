@@ -16,7 +16,7 @@ public class AgendaUsuarioAnswerDto {
 	
 	private int estado;
 	
-	private VeterinarioDto documentovt;
+	private VeterinarioYclinicaAnswerDto documentovt;
 
 	public Long getCodigoA() {
 		return codigoA;
@@ -66,11 +66,11 @@ public class AgendaUsuarioAnswerDto {
 		this.estado = estado;
 	}
 
-	public VeterinarioDto getDocumentovt() {
+	public VeterinarioYclinicaAnswerDto getDocumentovt() {
 		return documentovt;
 	}
 
-	public void setDocumentovt(VeterinarioDto documentovt) {
+	public void setDocumentovt(VeterinarioYclinicaAnswerDto documentovt) {
 		this.documentovt = documentovt;
 	}
 
